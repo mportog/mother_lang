@@ -11,7 +11,9 @@
 
 #### Linguagem utilizada: JAVA
 
-## **[Vídeo Explicativo]()**
+## Video-Aulas utilizadas como base: **[Compiladores - Curso Completo](https://youtube.com/playlist?list=PLjcmNukBom6--0we1zrpoUE2GuRD-Me6W)**:
+
+## Entrega dos participantes no **[Vídeo Explicativo]()** sobre o projeto
 
 ## Itens do Projeto
 
