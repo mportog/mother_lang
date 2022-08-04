@@ -1,6 +1,6 @@
 package br.com.ufabc.motherLanguage.main;
 
-import br.com.ufabc.motherLanguage.exception.MotherLanguageException;
+import br.com.ufabc.motherLanguage.exception.MotherSemanticException;
 import br.com.ufabc.motherLanguage.parser.MotherLangLexer;
 import br.com.ufabc.motherLanguage.parser.MotherLangParser;
 import org.antlr.v4.runtime.CharStreams;
@@ -19,7 +19,7 @@ public class MainClass {
 
             System.out.println("Compilation Successful");
 
-        } catch (MotherLanguageException exception) {
+        } catch (MotherSemanticException exception) {
             System.out.println("Semantic Error: " + exception.getMessage());
         } catch (Exception exception) {
             System.out.println("Error: " + exception.getMessage());

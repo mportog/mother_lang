@@ -1,4 +1,4 @@
-// Generated from /Users/matheusporto/Documents/mother_lang/motherLang/MotherLang.g4 by ANTLR 4.10.1
+// Generated from /Users/matheusporto/Documents/mother_lang/motherLang/MotherLang.g4 by ANTLR 4.7.1
 package br.com.ufabc.motherLanguage.parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
