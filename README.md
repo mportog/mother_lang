@@ -1,7 +1,4 @@
-<p align="center"><a target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Logo_UFABC.svg" width="150"></a></p>
-
-# MotherLang 
-## Projeto de Compiladores - Prof Isidro
+<h1 align="center"> MotherLang </br> Projeto de Compiladores - Prof Isidro </h1>
 
 ### Grupo:
 
@@ -9,26 +6,35 @@
 |-------|----|
 | Matheus Porto Garcia   | 11051116|
 
-#### Linguagem utilizada: JAVA
+## Video-Aulas utilizadas como base: **[Compiladores - Curso Completo](https://youtube.com/playlist?list=PLjcmNukBom6--0we1zrpoUE2GuRD-Me6W)**.
 
-## Video-Aulas utilizadas como base: **[Compiladores - Curso Completo](https://youtube.com/playlist?list=PLjcmNukBom6--0we1zrpoUE2GuRD-Me6W)**:
+## **[Vídeo explicativo com os participantes]()** sobre o projeto.
 
-## Entrega dos participantes no **[Vídeo Explicativo]()** sobre o projeto
-
-## Itens do Projeto
+## Itens checklist do Projeto
 
 | Itens Obrigatórios  |  Entregue  |
 | ------------------- | ------------------- |
 |  Possuir 2 tipos de variáveis (pelo menos 1 String))                            |  Ok|
 |  Possuir a instrução **if-else**                                                |  Ok |
-|  Pelo menos 1 estrutura de repetição                                            |  - |
-|  Verificar atribuição de variáveis (Erro semântico) - compatibilidade de tipos  |  - |
 |  Possui operações de Entrada e Saída                                            | Ok |
 |  Aceitar números decimais                                                       |  Ok |
 |  Verificar se variável foi ou não declarada                                     |  Ok |
 |  Verificar se variável declarada foi ou não utilizada                           |  Ok |
-|  Linguagem Destino (C/Java/Python)                                              | Java - Ok |
+|  Linguagem Destino (Java)                                              |  Ok |
+|  Verificar se a variável foi ou não inicializada, atribuído um valor a ela                           | Ok |
+|  Pelo menos 1 estrutura de repetição                                            |  - |
+|  Verificar atribuição de variáveis (Erro semântico) - compatibilidade de tipos  |  - |
 
-| Itens Opcionais  |  Entregue  |
+|  Elementos adicionais (pelo menos 2 dos itens abaixo) | Entregue | 
 | ------------------- | ------------------- |
-|  Verificar se a variável foi ou não inicializada, ou seja, foi atribuído um valor a ela                           | Ok|
+|  Nova instrução para Switch/Case (escolha/caso)                          | -|
+|  Mais tipos de dados                          | -|
+|  Inclusão de novos operadores (exponenciação, raiz quadrada, logaritmos)                          | -|
+|  Geração de código para mais de uma linguagem diferente                          | -|
+
+|  Elementos Extraordinarios (pelo menos 2 itens abaixo) | Entregue | 
+| ------------------- | ------------------- |
+|  Criar um interpretador a partir da AST                          | -|
+|  Criar um editor com Highlights de palavras reservadas (editor Desktop)                          | -|
+|  Criar um editor Web para o código                          | -|
+|  Tornar o compilador um Webservice para receber programas e enviar respostas de possíveis erros                          | -|
