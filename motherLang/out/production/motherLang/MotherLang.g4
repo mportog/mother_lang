@@ -44,7 +44,7 @@ grammar MotherLang;
             verificaID(id);
             MotherVariable var = symbolTable.get(id);
             if(var.getType() != MotherVariable.TEXT){
-                throw new MotherSemanticException("variable " + var.getName() +"NOT A TEXT");
+                throw new MotherSemanticException("Variable " + var.getName() +" not a text type - types mismatch");
             }
     }
 
@@ -52,9 +52,17 @@ grammar MotherLang;
             verificaID(id);
             MotherVariable var = symbolTable.get(id);
             if(var.getType() != MotherVariable.NUMBER){
-                throw new MotherSemanticException("variable " + var.getName() +"NOT A NUMBER");
+                throw new MotherSemanticException("variable " + var.getName() +" not a number type - types mismatch");
             }
     }
+
+       public void verificaBooleano(String id) {
+                verificaID(id);
+                MotherVariable var = symbolTable.get(id);
+                if(var.getType() != MotherVariable.BOOLEAN){
+                    throw new MotherSemanticException("variable " + var.getName() +" not a boolean type - types mismatch");
+                }
+        }
 
     public void verificaUsoVars() {
         for(MotherSymbol symbol : symbolTable.values()) {
@@ -115,6 +123,7 @@ declaravar :  tipo ID  {
 
 tipo       : 'numero' { _tipo = MotherVariable.NUMBER;  }
            | 'texto'  { _tipo = MotherVariable.TEXT;  }
+           | 'booleano'  { _tipo = MotherVariable.BOOLEAN;  }
            ;
 
 bloco	: { curThread = new ArrayList<AbstractCommand>();
@@ -162,9 +171,14 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                     _exprID = _input.LT(-1).getText();
                    }
                ATTR { _exprContent = ""; }
-               (expr | TEXT { verificaText(_exprID);
+               (expr
+               | TEXT { verificaText(_exprID);
                             _exprContent += _input.LT(-1).getText() ;
-                            })
+                      }
+               | BOOLEAN { verificaBooleano(_exprID);
+                           _exprContent += _input.LT(-1).getText() ;
+                         }
+               )
                SC
                {
                  MotherVariable var = (MotherVariable)symbolTable.get(_exprID);
@@ -178,7 +192,7 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
 cmdselecao  :  'se' AP
                     ID    { _exprDecision = _input.LT(-1).getText(); }
                     OPREL { _exprDecision += _input.LT(-1).getText(); }
-                    (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                    (ID | NUMBER | BOOLEAN ) {_exprDecision += _input.LT(-1).getText(); }
                     FP
                     ACH
                     { curThread = new ArrayList<AbstractCommand>();
@@ -226,6 +240,11 @@ termo		: ID { verificaID(_input.LT(-1).getText());
               {
                 _exprContent += _input.LT(-1).getText();
               }
+            |
+              BOOLEAN
+              {
+                _exprContent += _input.LT(-1).getText();
+              }
 			;
 
 AP	: '('
@@ -268,3 +287,21 @@ NUMBER	: [0-9]+ ('.' [0-9]+)?
 		;
 
 WS	: (' ' | '\t' | '\n' | '\r') -> skip;
+
+BOOLEAN : (TRUE|FALSE)
+        ;
+
+TRUE : 'vdd'
+     ;
+
+FALSE : 'falso'
+      ;
+
+AND : 'e'
+    ;
+
+OR  : 'ou'
+    ;
+
+OPBINARY  : AND | OR
+          ;

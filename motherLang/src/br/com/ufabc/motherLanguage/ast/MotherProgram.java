@@ -3,7 +3,6 @@ package br.com.ufabc.motherLanguage.ast;
 import br.com.ufabc.motherLanguage.datastructures.MotherSymbol;
 import br.com.ufabc.motherLanguage.datastructures.MotherSymbolTable;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
@@ -15,20 +14,21 @@ public class MotherProgram {
     public void generateTarget() {
         StringBuilder str = new StringBuilder();
         str.append("import java.util.Scanner;\n");
-        str.append("public class MainClass{ \n");
-        str.append("  public static void main(String args[]){\n ");
-        str.append("      Scanner _key = new Scanner(System.in);\n");
+        str.append("public class MainClass{\n");
+        str.append("    public static void main(String args[]){\n");
+        str.append("        Scanner _key = new Scanner(System.in);\n");
         for (MotherSymbol symbol : varTable.getAll()) {
+            str.append("        ");
             str.append(symbol.generateJavaCode() + "\n");
         }
         for (AbstractCommand command : comandos) {
-            str.append(command.generateJavaCode() + "\n");
+            str.append(command.generateJavaCode()).append("\n");
         }
-        str.append("  }");
+        str.append("    }\n");
         str.append("}");
 
         try {
-            FileWriter fr = new FileWriter(new File("src/MainClass.java"));
+            FileWriter fr = new FileWriter("src/MainClass.java");
             fr.write(str.toString());
             fr.close();
         } catch (Exception ex) {

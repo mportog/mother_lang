@@ -18,6 +18,6 @@ public abstract class MotherSymbol {
 
     @Override
     public String toString() {
-        return "FantasticSymbol [name=" + name + "]";
+        return "MotherSymbol [name=" + name + "]";
     }
 }

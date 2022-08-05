@@ -4,6 +4,7 @@ public class MotherVariable extends MotherSymbol {
 
     public static final int NUMBER = 0;
     public static final int TEXT = 1;
+    public static final int BOOLEAN = 2;
 
     private int type;
     private String value;
@@ -41,15 +42,21 @@ public class MotherVariable extends MotherSymbol {
 
     @Override
     public String toString() {
-        return "FantasticVariable [name=" + name + ", type=" + type + ", value=" + value + "]";
+        return "MotherVariable [name=" + name + ", type=" + type + ", value=" + value + "]";
     }
 
     public String generateJavaCode() {
-        String str;
-        if (type == NUMBER) {
-            str = "double ";
-        } else {
-            str = "String ";
+        String str = "";
+        switch (type) {
+            case NUMBER:
+                str = "double ";
+                break;
+            case TEXT:
+                str = "String ";
+                break;
+            case BOOLEAN:
+                str = "Boolean ";
+                break;
         }
         return str + " " + super.name + ";";
     }
