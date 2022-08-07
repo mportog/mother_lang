@@ -136,6 +136,18 @@ public class MotherLangBaseListener implements MotherLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCmdexponenciacao(MotherLangParser.CmdexponenciacaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdexponenciacao(MotherLangParser.CmdexponenciacaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExpr(MotherLangParser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}

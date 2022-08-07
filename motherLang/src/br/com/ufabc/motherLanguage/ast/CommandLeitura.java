@@ -15,15 +15,21 @@ public class CommandLeitura extends AbstractCommand {
     @Override
     public String generateJavaCode() {
         // TODO Auto-generated method stub
-        return id + "=" + parseType();
+        return id + " = " + parseType();
     }
 
     private String parseType() {
-        String str = "_key.nextLine();";
-        if (var.getType() == MotherVariable.NUMBER) {
-            str = "Double.parseDouble(_key.nextLine());";
-        } else if (var.getType() == MotherVariable.BOOLEAN) {
-            str = "_key.nextLine().equals(\"vdd\") ? true : false;";
+        String str = "";
+        switch (var.getType()) {
+            case MotherVariable.NUMBER:
+                str = "Double.parseDouble(_key.nextLine());";
+                break;
+            case MotherVariable.BOOLEAN:
+                str = "_key.nextLine().equals(\"true\") ? true : false;";
+                break;
+            case MotherVariable.TEXT:
+                str = "_key.nextLine();";
+                break;
         }
         return str;
     }

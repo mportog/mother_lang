@@ -5,6 +5,7 @@ public class MotherVariable extends MotherSymbol {
     public static final int NUMBER = 0;
     public static final int TEXT = 1;
     public static final int BOOLEAN = 2;
+    public static final int INTEGER = 3;
 
     private int type;
     private String value;

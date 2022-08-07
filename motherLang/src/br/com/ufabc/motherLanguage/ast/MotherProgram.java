@@ -14,15 +14,16 @@ public class MotherProgram {
     public void generateTarget() {
         StringBuilder str = new StringBuilder();
         str.append("import java.util.Scanner;\n");
-        str.append("public class MainClass{\n");
-        str.append("    public static void main(String args[]){\n");
+        str.append("import java.lang.Math;\n\n");
+        str.append("public class MainClass {\n");
+        str.append("    public static void main(String args[]) {\n");
         str.append("        Scanner _key = new Scanner(System.in);\n");
+
         for (MotherSymbol symbol : varTable.getAll()) {
-            str.append("        ");
-            str.append(symbol.generateJavaCode() + "\n");
+            str.append("        " + symbol.generateJavaCode() + "\n");
         }
         for (AbstractCommand command : comandos) {
-            str.append(command.generateJavaCode()).append("\n");
+            str.append("        " + command.generateJavaCode()).append("\n");
         }
         str.append("    }\n");
         str.append("}");

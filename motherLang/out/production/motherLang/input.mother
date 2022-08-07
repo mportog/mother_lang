@@ -1,7 +1,5 @@
 programa
 
- texto a;
- a = 90;
- escreva(a);
+elevado(2.0,3.0);
 
 fimprog;

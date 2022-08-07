@@ -27,6 +27,9 @@ grammar MotherLang;
 	private String _exprDecision;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
+	private String _exprPowRes;
+	private String _exprPowExp;
+	private String _exprPowBase;
 
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
@@ -91,7 +94,7 @@ prog	: 'programa' decl bloco  'fimprog;'
            }
 		;
 
-decl    :  (declaravar)+
+decl    :  (declaravar)*
         ;
 
 declaravar :  tipo ID  {
@@ -129,13 +132,14 @@ tipo       : 'numero' { _tipo = MotherVariable.NUMBER;  }
 bloco	: { curThread = new ArrayList<AbstractCommand>();
 	        stack.push(curThread);
           }
-          (cmd)+
+          (cmd)*
 		;
 
 cmd		:  cmdleitura
  		|  cmdescrita
  		|  cmdattrib
  		|  cmdselecao
+ 		|  cmdexponenciacao
 		;
 
 cmdleitura	: 'leia' AP
@@ -144,7 +148,6 @@ cmdleitura	: 'leia' AP
                         }
                      FP
                      SC
-
               { verificaID(_readID);
               	MotherVariable var = symbolTable.get(_readID);
               	var.setInit(true);
@@ -175,9 +178,6 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                | TEXT { verificaText(_exprID);
                             _exprContent += _input.LT(-1).getText() ;
                       }
-               | BOOLEAN { verificaBooleano(_exprID);
-                           _exprContent += _input.LT(-1).getText() ;
-                         }
                )
                SC
                {
@@ -190,9 +190,23 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
 			;
 
 cmdselecao  :  'se' AP
-                    ID    { _exprDecision = _input.LT(-1).getText(); }
-                    OPREL { _exprDecision += _input.LT(-1).getText(); }
-                    (ID | NUMBER | BOOLEAN ) {_exprDecision += _input.LT(-1).getText(); }
+                    (
+                     ID    { _exprDecision = _input.LT(-1).getText(); }
+                     OPREL { _exprDecision += _input.LT(-1).getText(); }
+                     (ID | NUMBER ) {_exprDecision += _input.LT(-1).getText(); }
+                    )
+                    |
+                    (
+                     ID    { _exprDecision = _input.LT(-1).getText(); }
+                     OPREL { _exprDecision += _input.LT(-1).getText(); }
+                     (ID | NUMBER ) {_exprDecision += _input.LT(-1).getText(); }
+                     OPBINARY { _exprDecision += _input.LT(-1).getText(); }
+                     ID    { _exprDecision = _input.LT(-1).getText(); }
+                     OPREL { _exprDecision += _input.LT(-1).getText(); }
+                     (ID | NUMBER ) {_exprDecision += _input.LT(-1).getText(); }
+                    )+
+                     |
+                     BOOLEAN { _exprDecision += _input.LT(-1).getText(); }
                     FP
                     ACH
                     { curThread = new ArrayList<AbstractCommand>();
@@ -220,10 +234,21 @@ cmdselecao  :  'se' AP
                    )?
             ;
 
+cmdexponenciacao  : 'elevado'  AP
+                    NUMBER {_exprPowBase = _input.LT(-1).getText();}
+                    VIR
+                    NUMBER {_exprPowExp = _input.LT(-1).getText();}
+                    FP
+                    SC
+                    {
+                     CommandExponenciacao cmd = new CommandExponenciacao(_exprPowBase, _exprPowExp);
+                     stack.peek().add(cmd);
+                    }
+                  ;
+
 expr		:  termo (
 	             OP  { _exprContent += _input.LT(-1).getText();}
-	            termo
-	            )*
+	            termo )*
 			;
 
 termo		: ID { verificaID(_input.LT(-1).getText());
@@ -237,11 +262,6 @@ termo		: ID { verificaID(_input.LT(-1).getText());
               }
             |
               TEXT
-              {
-                _exprContent += _input.LT(-1).getText();
-              }
-            |
-              BOOLEAN
               {
                 _exprContent += _input.LT(-1).getText();
               }
@@ -291,16 +311,16 @@ WS	: (' ' | '\t' | '\n' | '\r') -> skip;
 BOOLEAN : (TRUE|FALSE)
         ;
 
-TRUE : 'vdd'
+TRUE : 'true'
      ;
 
-FALSE : 'falso'
+FALSE : 'false'
       ;
 
-AND : 'e'
+AND : '&&'
     ;
 
-OR  : 'ou'
+OR  : '||'
     ;
 
 OPBINARY  : AND | OR

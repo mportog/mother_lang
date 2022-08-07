@@ -1,8 +1,9 @@
 import java.util.Scanner;
-public class MainClass{ 
-  public static void main(String args[]){
+import java.lang.Math;
+
+public class MainClass {
+    public static void main(String args[]) {
         Scanner _key = new Scanner(System.in);
-        String  a;
-        a = 90;
-System.out.println(a);
-  }}
+        System.out.println(Math.pow(2.0,3.0));
+    }
+}

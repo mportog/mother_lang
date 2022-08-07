@@ -109,6 +109,16 @@ public interface MotherLangListener extends ParseTreeListener {
 	 */
 	void exitCmdselecao(MotherLangParser.CmdselecaoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MotherLangParser#cmdexponenciacao}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdexponenciacao(MotherLangParser.CmdexponenciacaoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MotherLangParser#cmdexponenciacao}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdexponenciacao(MotherLangParser.CmdexponenciacaoContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MotherLangParser#expr}.
 	 * @param ctx the parse tree
 	 */
