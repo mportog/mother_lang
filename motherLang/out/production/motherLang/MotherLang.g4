@@ -37,6 +37,10 @@ grammar MotherLang;
 		}
 	}
 
+	public int getTipoId(String id){
+	 return symbolTable.get(id).getType();
+	}
+
 	public void verificaInicializacao(String id) {
         if(!symbolTable.get(id).isInit()) {
             throw new MotherSemanticException("Variable "+id+" not initialized");
@@ -97,7 +101,8 @@ prog	: 'programa' decl bloco  'fimprog;'
 decl    :  (declaravar)*
         ;
 
-declaravar :  tipo ID  {
+declaravar :  tipo
+              ID  {
 	                  _varName = _input.LT(-1).getText();
 	                  _varValue = null;
 	                  variable = new MotherVariable(_varName, _tipo, _varValue);
@@ -174,9 +179,13 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                     _exprID = _input.LT(-1).getText();
                    }
                ATTR { _exprContent = ""; }
-               (expr
+               (
+               expr
+               | BOOL { verificaBooleano(_exprID);
+                        _exprContent += _input.LT(-1).getText() ;
+                      }
                | TEXT { verificaText(_exprID);
-                            _exprContent += _input.LT(-1).getText() ;
+                        _exprContent += _input.LT(-1).getText() ;
                       }
                )
                SC
@@ -184,36 +193,25 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                  MotherVariable var = (MotherVariable)symbolTable.get(_exprID);
                  var.setInit(true);
                  var.setValue(_exprContent);
-               	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
+               	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent,  getTipoId(_exprID));
                	 stack.peek().add(cmd);
                }
 			;
 
 cmdselecao  :  'se' AP
                     (
-                     ID    { _exprDecision = _input.LT(-1).getText(); }
-                     OPREL { _exprDecision += _input.LT(-1).getText(); }
-                     (ID | NUMBER ) {_exprDecision += _input.LT(-1).getText(); }
-                    )
+                      ID { _exprDecision = _input.LT(-1).getText(); }
                     |
-                    (
-                     ID    { _exprDecision = _input.LT(-1).getText(); }
-                     OPREL { _exprDecision += _input.LT(-1).getText(); }
-                     (ID | NUMBER ) {_exprDecision += _input.LT(-1).getText(); }
-                     OPBINARY { _exprDecision += _input.LT(-1).getText(); }
-                     ID    { _exprDecision = _input.LT(-1).getText(); }
-                     OPREL { _exprDecision += _input.LT(-1).getText(); }
-                     (ID | NUMBER ) {_exprDecision += _input.LT(-1).getText(); }
-                    )+
-                     |
-                     BOOLEAN { _exprDecision += _input.LT(-1).getText(); }
+                       ID { _exprDecision = _input.LT(-1).getText(); }
+                       OPREL { _exprDecision += _input.LT(-1).getText(); }
+                       (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                    )
                     FP
                     ACH
                     { curThread = new ArrayList<AbstractCommand>();
                       stack.push(curThread);
                     }
                     (cmd)+
-
                     FCH
                     {
                        listaTrue = stack.pop();
@@ -267,6 +265,9 @@ termo		: ID { verificaID(_input.LT(-1).getText());
               }
 			;
 
+BOOL : 'vdd' | 'falso'
+     ;
+
 AP	: '('
 	;
 
@@ -303,19 +304,10 @@ OPREL : '>' | '<' | '>=' | '<=' | '==' | '!='
 ID	: [a-z] ([a-z] | [A-Z] | [0-9])*
 	;
 
-NUMBER	: [0-9]+ ('.' [0-9]+)?
+NUMBER	: '-'? [0-9]+ ('.' [0-9]+)?
 		;
 
 WS	: (' ' | '\t' | '\n' | '\r') -> skip;
-
-BOOLEAN : (TRUE|FALSE)
-        ;
-
-TRUE : 'true'
-     ;
-
-FALSE : 'false'
-      ;
 
 AND : '&&'
     ;

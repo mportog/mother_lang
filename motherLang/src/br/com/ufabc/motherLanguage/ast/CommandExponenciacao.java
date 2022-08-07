@@ -11,7 +11,7 @@ public class CommandExponenciacao extends AbstractCommand {
 
     @Override
     public String generateJavaCode() {
-        return "System.out.println(Math.pow("+base+","+exp+"));";
+        return "System.out.println(Math.pow("+base+","+exp+"));\n";
     }
 
     @Override
