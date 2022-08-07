@@ -25,7 +25,7 @@ public class CommandLeitura extends AbstractCommand {
                 str = "Double.parseDouble(_key.nextLine());";
                 break;
             case MotherVariable.BOOLEAN:
-                str = "_key.nextLine().equals(\"true\") ? true : false;";
+                str = "_key.nextLine().equals(\"vdd\");";
                 break;
             case MotherVariable.TEXT:
                 str = "_key.nextLine();";
