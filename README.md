@@ -30,8 +30,8 @@
 |  Elementos adicionais (pelo menos 2 dos itens abaixo) | Entregue | 
 | ------------------- | ------------------- |
 |  Nova instrução para Switch/Case (escolha/caso)                          | -|
-|  Mais tipos de dados                          | -|
-|  Inclusão de novos operadores (exponenciação, raiz quadrada, logaritmos)                          | -|
+|  Mais tipos de dados (Boolean)                         | OK |
+|  Inclusão de novos operadores (exponenciação)                          | OK |
 |  Geração de código para mais de uma linguagem diferente                          | -|
 
 |  Elementos Extraordinarios (pelo menos 2 itens abaixo) | Entregue | 
