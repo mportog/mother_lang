@@ -14,29 +14,26 @@
 
 ## Itens checklist do Projeto
 
-| Itens Obrigatórios  |  Entregue  |
-| ------------------- | ------------------- |
-|  Possuir 2 tipos de variáveis (pelo menos 1 String))                            |  Ok|
-|  Possuir a instrução **if-else**                                                |  Ok |
-|  Possui operações de Entrada e Saída                                            | Ok |
-|  Aceitar números decimais                                                       |  Ok |
-|  Verificar se variável foi ou não declarada                                     |  Ok |
-|  Verificar se variável declarada foi ou não utilizada                           |  Ok |
-|  Linguagem Destino (Java)                                              |  Ok |
-|  Verificar se a variável foi ou não inicializada, atribuído um valor a ela                           | Ok |
-|  Pelo menos 1 estrutura de repetição                                            |  - |
-|  Verificar atribuição de variáveis (Erro semântico) - compatibilidade de tipos  |  - |
+ Itens Obrigatórios 
+- [x] Possuir 2 tipos de variáveis (pelo menos 1 String))
+- [x] Possuir a instrução **if-else**
+- [x] Possui operações de Entrada e Saída
+- [x] Aceitar números decimais
+- [x] Verificar se variável foi ou não declarada
+- [x] Verificar se variável declarada foi ou não utilizada
+- [x] Linguagem Destino (Java)
+- [x] Verificar se a variável foi ou não inicializada, atribuído um valor a ela
+- [ ] Pelo menos 1 estrutura de repetição
+- [x] Verificar atribuição de variáveis (Erro semântico) - compatibilidade de tipos
 
-|  Elementos adicionais (pelo menos 2 dos itens abaixo) | Entregue | 
-| ------------------- | ------------------- |
-|  Nova instrução para Switch/Case (escolha/caso)                          | -|
-|  Mais tipos de dados (Boolean)                         | OK |
-|  Inclusão de novos operadores (exponenciação)                          | OK |
-|  Geração de código para mais de uma linguagem diferente                          | -|
+### Elementos adicionais (pelo menos 2 dos itens abaixo)
+- [ ]  Nova instrução para Switch/Case (escolha/caso)
+- [x]  Mais tipos de dados (Boolean)
+- [x]  Inclusão de novos operadores (exponenciação)
+- [ ]  Geração de código para mais de uma linguagem diferente 
 
-|  Elementos Extraordinarios (pelo menos 2 itens abaixo) | Entregue | 
-| ------------------- | ------------------- |
-|  Criar um interpretador a partir da AST                          | -|
-|  Criar um editor com Highlights de palavras reservadas (editor Desktop)                          | -|
-|  Criar um editor Web para o código                          | -|
-|  Tornar o compilador um Webservice para receber programas e enviar respostas de possíveis erros                          | -|
+### Elementos Extraordinarios (pelo menos 2 itens abaixo)
+- [ ]  Criar um interpretador a partir da AST
+- [ ]  Criar um editor com Highlights de palavras reservadas (editor Desktop)
+- [ ]  Criar um editor Web para o código
+- [ ]  Tornar o compilador um Webservice para receber programas e enviar respostas de possíveis erros
