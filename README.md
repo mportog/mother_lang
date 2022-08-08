@@ -14,7 +14,7 @@
 
 ## Itens checklist do Projeto
 
- Itens Obrigatórios 
+### Itens Obrigatórios:
 - [x] Possuir 2 tipos de variáveis (pelo menos 1 String))
 - [x] Possuir a instrução **if-else**
 - [x] Possui operações de Entrada e Saída
@@ -23,16 +23,18 @@
 - [x] Verificar se variável declarada foi ou não utilizada
 - [x] Linguagem Destino (Java)
 - [x] Verificar se a variável foi ou não inicializada, atribuído um valor a ela
-- [ ] Pelo menos 1 estrutura de repetição
 - [x] Verificar atribuição de variáveis (Erro semântico) - compatibilidade de tipos
+- [ ] Pelo menos 1 estrutura de repetição
 
-### Elementos adicionais (pelo menos 2 dos itens abaixo)
-- [ ]  Nova instrução para Switch/Case (escolha/caso)
+
+### Elementos adicionais (pelo menos 2 dos itens abaixo):
 - [x]  Mais tipos de dados (Boolean)
 - [x]  Inclusão de novos operadores (exponenciação)
+- [ ]  Nova instrução para Switch/Case (escolha/caso)
 - [ ]  Geração de código para mais de uma linguagem diferente 
 
-### Elementos Extraordinarios (pelo menos 2 itens abaixo)
+
+### Elementos Extraordinarios (pelo menos 2 itens abaixo):
 - [ ]  Criar um interpretador a partir da AST
 - [ ]  Criar um editor com Highlights de palavras reservadas (editor Desktop)
 - [ ]  Criar um editor Web para o código
