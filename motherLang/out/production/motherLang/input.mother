@@ -1,33 +1,8 @@
 programa
 
-numero a, zero0, x;
-texto c;
-booleano t;
+numero x,y;
+texto t, z;
+booleano b;
 
-t = vdd;
-a = 40 ;
-zero0 = 0;
-x = 3+2*20/4;
-
-escreva(x);
-
-se(t){
-    c= "deu bom";
-} senao {
-    c= "deu ruim";
-}
-
-escreva(c);
-
-se(a>=zero0) {
-    c="variavel A maior ou igual que zero";
-}
-senao {
-        c="variavel A menor que zero";
-    }
-
-escreva(c);
-
-elevado(3.0,2);
 
 fimprog;

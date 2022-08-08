@@ -39,6 +39,16 @@ public interface MotherLangListener extends ParseTreeListener {
 	 */
 	void exitDeclaravar(MotherLangParser.DeclaravarContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MotherLangParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar(MotherLangParser.VarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MotherLangParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar(MotherLangParser.VarContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MotherLangParser#tipo}.
 	 * @param ctx the parse tree
 	 */

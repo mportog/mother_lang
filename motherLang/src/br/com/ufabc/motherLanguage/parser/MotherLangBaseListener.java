@@ -52,6 +52,18 @@ public class MotherLangBaseListener implements MotherLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterVar(MotherLangParser.VarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVar(MotherLangParser.VarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTipo(MotherLangParser.TipoContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -1,14 +1,14 @@
 package br.com.ufabc.motherLanguage.ast;
 
-import br.com.ufabc.motherLanguage.datastructures.MotherVariable;
+import br.com.ufabc.motherLanguage.datastructures.MotherVariableTypeEnum;
 
 public class CommandAtribuicao extends AbstractCommand{
 
     private String id;
     private String expr;
-    private int tipo;
+    private MotherVariableTypeEnum tipo;
 
-    public CommandAtribuicao(String id, String expr, int tipo) {
+    public CommandAtribuicao(String id, String expr, MotherVariableTypeEnum tipo) {
         this.id = id;
         this.expr = expr;
         this.tipo = tipo;
@@ -16,7 +16,7 @@ public class CommandAtribuicao extends AbstractCommand{
     @Override
     public String generateJavaCode() {
         // TODO Auto-generated method stub
-        if(tipo == MotherVariable.BOOLEAN)
+        if(tipo == MotherVariableTypeEnum.BOOLEAN)
             return id + " = "+expr.equals("vdd")+";";
         else
         return id + " = "+expr+";";

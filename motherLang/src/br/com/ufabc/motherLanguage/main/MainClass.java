@@ -20,9 +20,9 @@ public class MainClass {
             System.out.println("Compilation Successful");
 
         } catch (MotherSemanticException exception) {
-            System.out.println("Semantic Error: " + exception.getMessage());
+            System.out.println("MOTHERLANG SEMANTIC ERROR: " + exception.getMessage());
         } catch (Exception exception) {
-            System.out.println("Error: " + exception.getMessage());
+            System.out.println("GENERIC ERROR: " + exception.getMessage());
         }
     }
 }

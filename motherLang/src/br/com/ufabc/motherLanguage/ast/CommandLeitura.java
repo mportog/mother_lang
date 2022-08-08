@@ -21,13 +21,13 @@ public class CommandLeitura extends AbstractCommand {
     private String parseType() {
         String str = "";
         switch (var.getType()) {
-            case MotherVariable.NUMBER:
+            case NUMBER:
                 str = "Double.parseDouble(_key.nextLine());";
                 break;
-            case MotherVariable.BOOLEAN:
+            case BOOLEAN:
                 str = "_key.nextLine().equals(\"vdd\");";
                 break;
-            case MotherVariable.TEXT:
+            case TEXT:
                 str = "_key.nextLine();";
                 break;
         }
