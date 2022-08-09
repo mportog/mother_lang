@@ -27,17 +27,17 @@ public class CommandCaso extends AbstractCommand {
         for (int i = 0; i < listaExpCaso.size(); i++) {
             str.append("            ").append("case ").append(listaExpCaso.get(i)).append(":\n");
             for (AbstractCommand cmd : listaCaso.get(i)) {
-                str.append("                         ").append(cmd.generateJavaCode());
+                str.append("            ").append(cmd.generateJavaCode()).append("\n");
             }
-            str.append("            ").append("break;");
+            str.append("            ").append("break;\n");
         }
         if (padraoCaso.size() > 0) {
-            str.append("default:\n");
+            str.append("            ").append("default:\n");
             for (AbstractCommand cmd : padraoCaso) {
                 str.append("            ").append(cmd.generateJavaCode());
             }
         }
-        str.append("\n}\n");
+        str.append("\n    }\n");
         return str.toString();
     }
 

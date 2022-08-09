@@ -29,6 +29,7 @@ grammar MotherLang;
 	private ArrayList<AbstractCommand> listaFalse;
 	private String _exprPowExp;
 	private String _exprPowBase;
+    private String _exprSeleciona;
     private ArrayList<String> _listaExpCaso;
     private ArrayList<ArrayList<AbstractCommand>> _listaCaso;
     private ArrayList<AbstractCommand> _padraoCaso;
@@ -255,6 +256,8 @@ cmdselecionacaso : 'seleciona'
                     ACH
                     {
                      _listaExpCaso = new ArrayList<String>();
+                     _listaCaso = new ArrayList<ArrayList<AbstractCommand>>();
+                     _padraoCaso = new ArrayList<AbstractCommand>();
                     }
                     (
                       'caso'
@@ -271,13 +274,12 @@ cmdselecionacaso : 'seleciona'
                       }
                     )+
                     (
-                      'padrao'
+                      'nenhum'
                       DP
                        { curThread = new ArrayList<AbstractCommand>();
                          stack.push(curThread);
                        }
                       (cmd)+
-                      SC
                        { _padraoCaso = stack.pop(); }
                     )?
                     FCH

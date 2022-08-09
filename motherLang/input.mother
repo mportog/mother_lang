@@ -1,8 +1,12 @@
 programa
 
 numero a, zero0, x;
-texto c;
+texto c, condicaoT, casoT1, casoT2 , resultado;
 booleano t;
+
+condicaoT = "0";
+casoT1 = "1";
+casoT2 = "2";
 
 t = vdd;
 a = -1 ;
@@ -29,5 +33,19 @@ senao {
 escreva(c);
 
 elevado(3.0,2);
+
+
+seleciona( condicaoT ) {
+    caso "1":
+        resultado = "igual a T1";
+    para;
+    caso "2":
+        resultado = "igual a T2";
+    para;
+    nenhum:
+        resultado = "nem T1 nem T2";
+}
+
+escreva(resultado);
 
 fimprog;

@@ -27,9 +27,13 @@ grammar MotherLang;
 	private String _exprDecision;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
-	private String _exprPowRes;
 	private String _exprPowExp;
 	private String _exprPowBase;
+    private String _exprSeleciona;
+    private ArrayList<String> _listaExpCaso;
+    private ArrayList<ArrayList<AbstractCommand>> _listaCaso;
+    private ArrayList<AbstractCommand> _padraoCaso;
+
 
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
@@ -145,6 +149,7 @@ cmd		:  cmdleitura
  		|  cmdattrib
  		|  cmdselecao
  		|  cmdexponenciacao
+ 		|  cmdselecionacaso
 		;
 
 cmdleitura	: 'leia' AP
@@ -244,6 +249,46 @@ cmdexponenciacao  : 'elevado'  AP
                     }
                   ;
 
+cmdselecionacaso : 'seleciona'
+                    AP
+                    ID { _exprSeleciona = _input.LT(-1).getText(); }
+                    FP
+                    ACH
+                    {
+                     _listaExpCaso = new ArrayList<String>();
+                     _listaCaso = new ArrayList<ArrayList<AbstractCommand>>();
+                     _padraoCaso = new ArrayList<AbstractCommand>();
+                    }
+                    (
+                      'caso'
+                      termocaso
+                      DP
+                      { curThread = new ArrayList<AbstractCommand>();
+                        stack.push(curThread);
+                      }
+                      (cmd)+
+                      'para'
+                      SC
+                      {
+                       _listaCaso.add(stack.pop());
+                      }
+                    )+
+                    (
+                      'nenhum'
+                      DP
+                       { curThread = new ArrayList<AbstractCommand>();
+                         stack.push(curThread);
+                       }
+                      (cmd)+
+                       { _padraoCaso = stack.pop(); }
+                    )?
+                    FCH
+                    {
+                      CommandCaso cmd = new CommandCaso(_exprSeleciona, _listaExpCaso, _listaCaso, _padraoCaso);
+                      stack.peek().add(cmd);
+                    }
+                 ;
+
 expr		:  termo (
 	             OP  { _exprContent += _input.LT(-1).getText();}
 	            termo )*
@@ -265,6 +310,23 @@ termo		: ID { verificaID(_input.LT(-1).getText());
               }
 			;
 
+termocaso : ID {
+             verificaID(_input.LT(-1).getText());
+             verificaInicializacao(_input.LT(-1).getText());
+             _listaExpCaso.add(_input.LT(-1).getText());
+            }
+            |
+            NUMBER
+            {
+             _listaExpCaso.add(_input.LT(-1).getText());
+            }
+            |
+            TEXT
+            {
+             _listaExpCaso.add(_input.LT(-1).getText());
+            }
+            ;
+
 BOOL : 'vdd' | 'falso'
      ;
 
@@ -275,6 +337,9 @@ FP	: ')'
 	;
 
 SC	: ';'
+    ;
+
+DP	: ':'
 	;
 
 OP	: '+' | '-' | '*' | '/'
@@ -308,12 +373,3 @@ NUMBER	: '-'? [0-9]+ ('.' [0-9]+)?
 		;
 
 WS	: (' ' | '\t' | '\n' | '\r') -> skip;
-
-AND : '&&'
-    ;
-
-OR  : '||'
-    ;
-
-OPBINARY  : AND | OR
-          ;

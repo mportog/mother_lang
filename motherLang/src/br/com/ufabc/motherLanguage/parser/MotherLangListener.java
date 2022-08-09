@@ -119,6 +119,16 @@ public interface MotherLangListener extends ParseTreeListener {
 	 */
 	void exitCmdexponenciacao(MotherLangParser.CmdexponenciacaoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MotherLangParser#cmdselecionacaso}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdselecionacaso(MotherLangParser.CmdselecionacasoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MotherLangParser#cmdselecionacaso}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdselecionacaso(MotherLangParser.CmdselecionacasoContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MotherLangParser#expr}.
 	 * @param ctx the parse tree
 	 */
@@ -138,4 +148,14 @@ public interface MotherLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTermo(MotherLangParser.TermoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MotherLangParser#termocaso}.
+	 * @param ctx the parse tree
+	 */
+	void enterTermocaso(MotherLangParser.TermocasoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MotherLangParser#termocaso}.
+	 * @param ctx the parse tree
+	 */
+	void exitTermocaso(MotherLangParser.TermocasoContext ctx);
 }
