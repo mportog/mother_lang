@@ -1,6 +1,6 @@
 programa
 
-numero a, zero0, x;
+numero a, zero0, x, r;
 texto c, condicaoT, casoT1, casoT2 , resultado;
 booleano t;
 
@@ -32,7 +32,9 @@ senao {
 
 escreva(c);
 
-elevado(3.0,2);
+
+(3.0 elevado 2, resulta r);
+escreva(r);
 
 
 seleciona( condicaoT ) {
