@@ -30,7 +30,7 @@
 ### Elementos adicionais (pelo menos 2 dos itens abaixo):
 - [x]  Mais tipos de dados (Boolean)
 - [x]  Inclusão de novos operadores (exponenciação)
-- [ ]  Nova instrução para Switch/Case (escolha/caso)
+- [x]  Nova instrução para Switch/Case (escolha/caso)
 - [ ]  Geração de código para mais de uma linguagem diferente 
 
 
