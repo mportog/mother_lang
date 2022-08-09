@@ -5,7 +5,7 @@ texto c;
 booleano t;
 
 t = vdd;
-a = 40 ;
+a = -1 ;
 zero0 = 0;
 x = 3+2*20/4;
 

@@ -1,0 +1,21 @@
+programa
+
+texto condicaoT, casoT1, casoT2 , resultado;
+
+condicaoT = "0";
+casoT1 = "1";
+casoT2 = "2";
+
+seleciona( condicaoT ) {
+    caso "1":
+        resultado = "igual a T1";
+    para;
+    caso "2":
+        resultado = "igual a T2";
+    para;
+    nenhum:
+        resultado = "nem T1 nem T2";
+    }
+    escreva(resultado);
+
+fimprog;

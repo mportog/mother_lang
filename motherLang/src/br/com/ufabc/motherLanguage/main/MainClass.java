@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 public class MainClass {
     public static void main(String[] args) {
         try {
-            MotherLangLexer lexer = new MotherLangLexer(CharStreams.fromFileName("input.mother"));
+            MotherLangLexer lexer = new MotherLangLexer(CharStreams.fromFileName("input_seleciona_caso.mother"));
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);
             MotherLangParser parser = new MotherLangParser(tokenStream);
 
