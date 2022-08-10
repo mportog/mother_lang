@@ -60,4 +60,19 @@ public class MotherVariable extends MotherSymbol {
         }
         return str + " " + super.name + ";";
     }
+    public String generatePhytonCode() {
+        String str = "";
+        switch (type) {
+            case NUMBER:
+                str = "float";
+                break;
+            case TEXT:
+                str = "str";
+                break;
+            case BOOLEAN:
+                str = "bool";
+                break;
+        }
+        return str + " " + super.name;
+    }
 }

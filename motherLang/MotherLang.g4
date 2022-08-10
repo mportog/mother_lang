@@ -11,9 +11,9 @@ grammar MotherLang;
 }
 
 @members{
+private String DEFAULT_VALUE = "0";
 	private int _tipo;
-	private String _varName;
-	private String _varValue;
+	private String _varName, _varValue;
 	private MotherSymbolTable symbolTable = new MotherSymbolTable();
 	private MotherSymbol symbol;
 	private MotherVariable variable;
@@ -22,13 +22,9 @@ grammar MotherLang;
 	private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 	private String _readID;
 	private String _writeID;
-	private String _exprID;
-	private String _exprContent;
-	private String _exprDecision;
-	private ArrayList<AbstractCommand> listaTrue;
-	private ArrayList<AbstractCommand> listaFalse;
-	private String _exprPowExp;
-	private String _exprPowBase;
+	private String _exprID, _exprContent, _exprDecision;
+	private ArrayList<AbstractCommand> listaTrue, listaFalse;
+	private String _exprPowExp, _exprPowBase, _exprPowRes;
     private String _exprSeleciona;
     private ArrayList<String> _listaExpCaso;
     private ArrayList<ArrayList<AbstractCommand>> _listaCaso;
@@ -90,9 +86,13 @@ grammar MotherLang;
 		}
 	}
 
-	public void generateCode(){
-		program.generateTarget();
+	public void generateJavaCode(){
+		program.generateJavaTarget();
 	}
+
+		public void generatePhytonCode(){
+    		program.generatePhytonTarget();
+    	}
 }
 
 prog	: 'programa' decl bloco  'fimprog;'
@@ -185,7 +185,8 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                    }
                ATTR { _exprContent = ""; }
                (
-               expr
+               cmdexponenciacao
+               | expr
                | BOOL { verificaBooleano(_exprID);
                         _exprContent += _input.LT(-1).getText() ;
                       }
@@ -237,14 +238,23 @@ cmdselecao  :  'se' AP
                    )?
             ;
 
-cmdexponenciacao  : 'elevado'  AP
+cmdexponenciacao  : AP
                     NUMBER {_exprPowBase = _input.LT(-1).getText();}
-                    VIR
+                    'elevado'
                     NUMBER {_exprPowExp = _input.LT(-1).getText();}
+                    VIR
+                    'resulta'
+                    ID{
+                    verificaNumero(_input.LT(-1).getText());
+                    _exprPowRes = _input.LT(-1).getText();
+                    }
                     FP
                     SC
                     {
-                     CommandExponenciacao cmd = new CommandExponenciacao(_exprPowBase, _exprPowExp);
+                     MotherVariable var = (MotherVariable)symbolTable.get(_exprPowRes);
+                                     var.setInit(true);
+                                     var.setValue(DEFAULT_VALUE);
+                     CommandExponenciacao cmd = new CommandExponenciacao(_exprPowBase, _exprPowExp,_exprPowRes);
                      stack.peek().add(cmd);
                     }
                   ;

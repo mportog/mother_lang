@@ -4,6 +4,7 @@ public abstract class MotherSymbol {
     protected String name;
 
     public abstract String generateJavaCode();
+    public abstract String generatePhytonCode();
     public MotherSymbol(String name) {
         this.name = name;
     }
