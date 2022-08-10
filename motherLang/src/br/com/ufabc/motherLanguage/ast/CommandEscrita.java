@@ -12,6 +12,11 @@ public class CommandEscrita extends AbstractCommand {
         // TODO Auto-generated method stub
         return "System.out.println("+id+");";
     }
+
+    @Override
+    public String generatePythonCode(){
+        return "print(%id)";
+    }
     @Override
     public String toString() {
         return "CommandEscrita [id=" + id + "]";

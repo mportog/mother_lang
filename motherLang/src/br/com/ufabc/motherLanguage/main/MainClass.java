@@ -15,7 +15,9 @@ public class MainClass {
 
             parser.prog();
             parser.exibeComandos();
-            parser.generateCode();
+
+            parser.generateJavaCode();
+            parser.generatePhytonCode();
 
             System.out.println("Compilation Successful");
 

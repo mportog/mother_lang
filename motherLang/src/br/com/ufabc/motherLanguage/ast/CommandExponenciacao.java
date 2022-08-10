@@ -15,7 +15,10 @@ public class CommandExponenciacao extends AbstractCommand {
     public String generateJavaCode() {
         return out+"=Math.pow("+base+","+exp+");\n";
     }
-
+    @Override
+    public String generatePythonCode(){
+        return "exponenciacao phyton";
+    }
     @Override
     public String toString() {
         return "CommandExponenciacao [out = base^exp : base=" + base + ", exp=" + exp + " out="+out+"]";

@@ -86,9 +86,13 @@ private String DEFAULT_VALUE = "0";
 		}
 	}
 
-	public void generateCode(){
-		program.generateTarget();
+	public void generateJavaCode(){
+		program.generateJavaTarget();
 	}
+
+		public void generatePhytonCode(){
+    		program.generatePhytonTarget();
+    	}
 }
 
 prog	: 'programa' decl bloco  'fimprog;'

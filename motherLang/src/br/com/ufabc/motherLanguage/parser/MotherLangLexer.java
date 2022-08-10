@@ -1,6 +1,7 @@
 // Generated from /Users/matheusporto/Documents/mother_lang/motherLang/MotherLang.g4 by ANTLR 4.7.1
 package br.com.ufabc.motherLanguage.parser;
 
+
 import br.com.ufabc.motherLanguage.ast.AbstractCommand;
 import br.com.ufabc.motherLanguage.ast.MotherProgram;
 import br.com.ufabc.motherLanguage.datastructures.MotherSymbol;
@@ -164,9 +165,13 @@ public class MotherLangLexer extends Lexer {
 			}
 		}
 
-		public void generateCode(){
-			program.generateTarget();
+		public void generateJavaCode(){
+			program.generateJavaTarget();
 		}
+
+			public void generatePhytonCode(){
+	    		program.generatePhytonTarget();
+	    	}
 
 
 	public MotherLangLexer(CharStream input) {

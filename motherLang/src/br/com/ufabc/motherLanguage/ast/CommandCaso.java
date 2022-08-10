@@ -40,7 +40,10 @@ public class CommandCaso extends AbstractCommand {
         str.append("\n    }\n");
         return str.toString();
     }
-
+    @Override
+    public String generatePythonCode(){
+        return "switch case em phyton";
+    }
     @Override
     public String toString() {
         return "CommandCaso [condition=" + condition + ", listaExpCaso=" + listaExpCaso + ", listaCaso="
