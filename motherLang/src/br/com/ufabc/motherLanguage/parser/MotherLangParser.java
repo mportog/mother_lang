@@ -1,24 +1,25 @@
-// Generated from /Users/matheusporto/Documents/mother_lang/motherLang/MotherLang.g4 by ANTLR 4.7.1
+// Generated from C:\Users\welle\OneDrive\Documentos\GitHub\mother_lang\motherLang\MotherLang.g4 by ANTLR 4.7.1
 package br.com.ufabc.motherLanguage.parser;
 
-import br.com.ufabc.motherLanguage.ast.*;
-import br.com.ufabc.motherLanguage.datastructures.MotherSymbol;
-import br.com.ufabc.motherLanguage.datastructures.MotherSymbolTable;
-import br.com.ufabc.motherLanguage.datastructures.MotherVariable;
-import br.com.ufabc.motherLanguage.datastructures.MotherVariableTypeEnum;
-import br.com.ufabc.motherLanguage.exception.MotherSemanticException;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.ParserATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
-import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.tree.ParseTreeListener;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
-import java.util.ArrayList;
+	import br.com.ufabc.motherLanguage.datastructures.MotherVariableTypeEnum;
+	import br.com.ufabc.motherLanguage.ast.*;
+	import br.com.ufabc.motherLanguage.datastructures.MotherSymbol;
+	import br.com.ufabc.motherLanguage.datastructures.MotherSymbolTable;
+	import br.com.ufabc.motherLanguage.datastructures.MotherVariable;
+	import br.com.ufabc.motherLanguage.exception.MotherSemanticException;
+    import br.com.ufabc.motherLanguage.datastructures.MotherVariableTypeEnum;
+    import java.util.ArrayList;
+    import java.util.Stack;
+
+import org.antlr.v4.runtime.atn.*;
+import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
+import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Stack;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MotherLangParser extends Parser {
