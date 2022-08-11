@@ -31,6 +31,10 @@ public class CommandDecisao extends AbstractCommand {
         return str.toString();
     }
     @Override
+    public String generatePythonCode(){
+        return "if phyton";
+    }
+    @Override
     public String toString() {
         return "CommandDecisao [condition=" + condition + ", listaTrue=" + listaTrue + ", listaFalse=" + listaFalse
                 + "]";

@@ -12,9 +12,9 @@ grammar MotherLang;
 }
 
 @members{
+private String DEFAULT_VALUE = "0";
 	private MotherVariableTypeEnum _tipo;
-	private String _varName;
-	private String _varValue;
+	private String _varName, _varValue;
 	private MotherSymbolTable symbolTable = new MotherSymbolTable();
 	private MotherSymbol symbol;
 	private MotherVariable variable;
@@ -23,14 +23,14 @@ grammar MotherLang;
 	private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 	private String _readID;
 	private String _writeID;
-	private String _exprID;
-	private String _exprContent;
-	private String _exprDecision;
-	private ArrayList<AbstractCommand> listaTrue;
-	private ArrayList<AbstractCommand> listaFalse;
-	private String _exprPowRes;
-	private String _exprPowExp;
-	private String _exprPowBase;
+	private String _exprID, _exprContent, _exprDecision;
+	private ArrayList<AbstractCommand> listaTrue, listaFalse;
+	private String _exprPowExp, _exprPowBase, _exprPowRes;
+    private String _exprSeleciona;
+    private ArrayList<String> _listaExpCaso;
+    private ArrayList<ArrayList<AbstractCommand>> _listaCaso;
+    private ArrayList<AbstractCommand> _padraoCaso;
+
 
 	public void verificaDeclacracaoExistenteID(String id) {
 		if (!symbolTable.exists(id)){
@@ -80,9 +80,13 @@ grammar MotherLang;
 		}
 	}
 
-	public void generateCode(){
-		program.generateTarget();
+	public void generateJavaCode(){
+		program.generateJavaTarget();
 	}
+
+		public void generatePhytonCode(){
+    		program.generatePhytonTarget();
+    	}
 }
 
 prog	: 'programa' decl bloco  'fimprog;'
@@ -128,6 +132,7 @@ cmd		:  cmdleitura
  		|  cmdattrib
  		|  cmdselecao
  		|  cmdexponenciacao
+ 		|  cmdselecionacaso
 		;
 
 cmdleitura	: 'leia' AP
@@ -215,17 +220,66 @@ cmdselecao  :  'se' AP
                    )?
             ;
 
-cmdexponenciacao  : 'elevado'  AP
+cmdexponenciacao  : AP
                     NUMBER {_exprPowBase = _input.LT(-1).getText();}
-                    VIR
+                    'elevado'
                     NUMBER {_exprPowExp = _input.LT(-1).getText();}
+                    VIR
+                    'resulta'
+                    ID{
+                    verificaTipo(_input.LT(-1).getText(),MotherVariableTypeEnum.NUMBER);
+                    _exprPowRes = _input.LT(-1).getText();
+                    }
                     FP
                     SC
                     {
-                     CommandExponenciacao cmd = new CommandExponenciacao(_exprPowBase, _exprPowExp);
+                     MotherVariable var = (MotherVariable)symbolTable.get(_exprPowRes);
+                                     var.setInit(true);
+                                     var.setValue(DEFAULT_VALUE);
+                     CommandExponenciacao cmd = new CommandExponenciacao(_exprPowBase, _exprPowExp,_exprPowRes);
                      stack.peek().add(cmd);
                     }
                   ;
+
+cmdselecionacaso : 'seleciona'
+                    AP
+                    ID { _exprSeleciona = _input.LT(-1).getText(); }
+                    FP
+                    ACH
+                    {
+                     _listaExpCaso = new ArrayList<String>();
+                     _listaCaso = new ArrayList<ArrayList<AbstractCommand>>();
+                     _padraoCaso = new ArrayList<AbstractCommand>();
+                    }
+                    (
+                      'caso'
+                      termocaso
+                      DP
+                      { curThread = new ArrayList<AbstractCommand>();
+                        stack.push(curThread);
+                      }
+                      (cmd)+
+                      'para'
+                      SC
+                      {
+                       _listaCaso.add(stack.pop());
+                      }
+                    )+
+                    (
+                      'nenhum'
+                      DP
+                       { curThread = new ArrayList<AbstractCommand>();
+                         stack.push(curThread);
+                       }
+                      (cmd)+
+                       { _padraoCaso = stack.pop(); }
+                    )?
+                    FCH
+                    {
+                      CommandCaso cmd = new CommandCaso(_exprSeleciona, _listaExpCaso, _listaCaso, _padraoCaso);
+                      stack.peek().add(cmd);
+                    }
+                 ;
 
 expr		:  termo
                 (
@@ -243,12 +297,24 @@ termo		: ID { verificaTipo(_exprID,MotherVariableTypeEnum.NUMBER);
               {  verificaTipo(_exprID,MotherVariableTypeEnum.NUMBER);
               	_exprContent += _input.LT(-1).getText();
               }
-            |
-              TEXT
-              {
-                _exprContent += _input.LT(-1).getText();
-              }
 			;
+
+termocaso : ID {
+             verificaDeclacracaoExistenteID(_input.LT(-1).getText());
+             verificaInicializacao(_input.LT(-1).getText());
+             _listaExpCaso.add(_input.LT(-1).getText());
+            }
+            |
+            NUMBER
+            {
+             _listaExpCaso.add(_input.LT(-1).getText());
+            }
+            |
+            TEXT
+            {
+             _listaExpCaso.add(_input.LT(-1).getText());
+            }
+            ;
 
 BOOL : 'vdd' | 'falso'
      ;
@@ -260,6 +326,9 @@ FP	: ')'
 	;
 
 SC	: ';'
+    ;
+
+DP	: ':'
 	;
 
 OP	: '+' | '-' | '*' | '/'

@@ -5,10 +5,18 @@ public class MainClass {
     public static void main(String args[]) {
         Scanner _key = new Scanner(System.in);
         double  a;
+        double  r;
         String  c;
+        String  casoT2;
+        String  resultado;
         Boolean  t;
         double  x;
+        String  condicaoT;
+        String  casoT1;
         double  zero0;
+        condicaoT = "0";
+        casoT1 = "1";
+        casoT2 = "2";
         t = true;
         a = -1;
         zero0 = 0;
@@ -28,7 +36,20 @@ public class MainClass {
 }
 
         System.out.println(c);
-        System.out.println(Math.pow(3.0,2));
+        r=Math.pow(3.0,2);
 
+        System.out.println(r);
+        switch (condicaoT) {
+            case "1":
+            resultado = "igual a T1";
+            break;
+            case "2":
+            resultado = "igual a T2";
+            break;
+            default:
+            resultado = "nem T1 nem T2";
+    }
+
+        System.out.println(resultado);
     }
 }

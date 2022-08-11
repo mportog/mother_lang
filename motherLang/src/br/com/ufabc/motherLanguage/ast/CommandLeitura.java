@@ -15,10 +15,10 @@ public class CommandLeitura extends AbstractCommand {
     @Override
     public String generateJavaCode() {
         // TODO Auto-generated method stub
-        return id + " = " + parseType();
+        return id + " = " + parseJavaType();
     }
 
-    private String parseType() {
+    private String parseJavaType() {
         String str = "";
         switch (var.getType()) {
             case NUMBER:
@@ -33,7 +33,10 @@ public class CommandLeitura extends AbstractCommand {
         }
         return str;
     }
-
+    @Override
+    public String generatePythonCode(){
+        return id + " = _key.nextLine()";
+    }
     @Override
     public String toString() {
         return "CommandLeitura [id=" + id + "]";

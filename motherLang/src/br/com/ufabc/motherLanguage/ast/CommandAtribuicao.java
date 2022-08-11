@@ -21,6 +21,11 @@ public class CommandAtribuicao extends AbstractCommand{
         else
         return id + " = "+expr+";";
     }
+
+    @Override
+    public String generatePythonCode(){
+        return "atribuicao em phyton";
+    }
     @Override
     public String toString() {
         return "CommandAtribuicao [id=" + id + ", expr=" + expr + "]";

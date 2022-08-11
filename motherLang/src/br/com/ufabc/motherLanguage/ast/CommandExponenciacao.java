@@ -3,19 +3,24 @@ package br.com.ufabc.motherLanguage.ast;
 public class CommandExponenciacao extends AbstractCommand {
     private String base;
     private String exp;
+    private String out;
 
-    public CommandExponenciacao(String b, String e) {
+    public CommandExponenciacao(String b, String e, String r) {
         this.base = b;
         this.exp = e;
+        this.out = r;
     }
 
     @Override
     public String generateJavaCode() {
-        return "System.out.println(Math.pow("+base+","+exp+"));\n";
+        return out+"=Math.pow("+base+","+exp+");\n";
     }
-
+    @Override
+    public String generatePythonCode(){
+        return "exponenciacao phyton";
+    }
     @Override
     public String toString() {
-        return "CommandExponenciacao [base^exp : base=" + base + ", exp=" + exp + "]";
+        return "CommandExponenciacao [out = base^exp : base=" + base + ", exp=" + exp + " out="+out+"]";
     }
 }

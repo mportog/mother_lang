@@ -11,7 +11,7 @@ public class MotherProgram {
     private ArrayList<AbstractCommand> comandos;
     private String programName;
 
-    public void generateTarget() {
+    public void generateJavaTarget() {
         StringBuilder str = new StringBuilder();
         str.append("import java.util.Scanner;\n");
         str.append("import java.lang.Math;\n\n");
@@ -30,6 +30,27 @@ public class MotherProgram {
 
         try {
             FileWriter fr = new FileWriter("src/MainClass.java");
+            fr.write(str.toString());
+            fr.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public void generatePhytonTarget() {
+        StringBuilder str = new StringBuilder();
+        str.append("add math.lib de phyton\n\n");
+        for (MotherSymbol symbol : varTable.getAll()) {
+            str.append("        " + symbol.generatePhytonCode() + "\n");
+        }
+        for (AbstractCommand command : comandos) {
+            str.append("        " + command.generatePythonCode()).append("\n");
+        }
+        str.append("    }\n");
+
+        try {
+            FileWriter fr = new FileWriter("src/MainClass.py");
             fr.write(str.toString());
             fr.close();
         } catch (Exception ex) {

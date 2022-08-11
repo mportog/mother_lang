@@ -21,13 +21,15 @@ public class MainClass {
     }
     public static void main(String[] args) {
         try {
-            MotherLangLexer lexer = new MotherLangLexer(CharStreams.fromFileName(INPUT_TESTANDO_ERROS.ambiente));
+            MotherLangLexer lexer = new MotherLangLexer(CharStreams.fromFileName("input.mother"));
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);
             MotherLangParser parser = new MotherLangParser(tokenStream);
 
             parser.prog();
             parser.exibeComandos();
-            parser.generateCode();
+
+            parser.generateJavaCode();
+            parser.generatePhytonCode();
 
             System.out.println("Compilation Successful");
 
