@@ -27,8 +27,8 @@ se(a>=zero0) {
     c="variavel A maior ou igual que zero";
 }
 senao {
-        c="variavel A menor que zero";
-    }
+    c="variavel A menor que zero";
+}
 
 escreva(c);
 

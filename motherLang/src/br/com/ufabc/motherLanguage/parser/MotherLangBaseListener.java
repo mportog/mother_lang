@@ -1,5 +1,6 @@
-// Generated from /Users/matheusporto/Documents/mother_lang/motherLang/MotherLang.g4 by ANTLR 4.7.1
+// Generated from C:\Users\welle\OneDrive\Documentos\GitHub\mother_lang\motherLang\MotherLang.g4 by ANTLR 4.7.1
 package br.com.ufabc.motherLanguage.parser;
+
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -47,6 +48,18 @@ public class MotherLangBaseListener implements MotherLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeclaravar(MotherLangParser.DeclaravarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVar(MotherLangParser.VarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVar(MotherLangParser.VarContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

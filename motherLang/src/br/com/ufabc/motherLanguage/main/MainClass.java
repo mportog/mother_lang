@@ -6,7 +6,19 @@ import br.com.ufabc.motherLanguage.parser.MotherLangParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
+import static br.com.ufabc.motherLanguage.main.MainClass.MotherLangInputSource.*;
+
 public class MainClass {
+    enum MotherLangInputSource {
+        INPUT_ENTREGA("input.mother"),
+        INPUT_TESTANDO_ERROS("input_teste_erros.mother");
+
+        public final String ambiente;
+
+        MotherLangInputSource(String ambiente) {
+            this.ambiente = ambiente;
+        }
+    }
     public static void main(String[] args) {
         try {
             MotherLangLexer lexer = new MotherLangLexer(CharStreams.fromFileName("input.mother"));
@@ -22,9 +34,9 @@ public class MainClass {
             System.out.println("Compilation Successful");
 
         } catch (MotherSemanticException exception) {
-            System.out.println("Semantic Error: " + exception.getMessage());
+            System.out.println("MOTHERLANG SEMANTIC ERROR: " + exception.getMessage());
         } catch (Exception exception) {
-            System.out.println("Error: " + exception.getMessage());
+            System.out.println("GENERIC ERROR: " + exception.getMessage());
         }
     }
 }

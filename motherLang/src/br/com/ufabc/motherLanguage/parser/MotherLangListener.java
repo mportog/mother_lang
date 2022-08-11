@@ -1,5 +1,7 @@
-// Generated from /Users/matheusporto/Documents/mother_lang/motherLang/MotherLang.g4 by ANTLR 4.7.1
+// Generated from C:\Users\welle\OneDrive\Documentos\GitHub\mother_lang\motherLang\MotherLang.g4 by ANTLR 4.7.1
 package br.com.ufabc.motherLanguage.parser;
+
+
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -38,6 +40,16 @@ public interface MotherLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclaravar(MotherLangParser.DeclaravarContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MotherLangParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar(MotherLangParser.VarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MotherLangParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar(MotherLangParser.VarContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MotherLangParser#tipo}.
 	 * @param ctx the parse tree

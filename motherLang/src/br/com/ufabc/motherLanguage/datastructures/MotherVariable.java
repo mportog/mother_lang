@@ -1,26 +1,21 @@
 package br.com.ufabc.motherLanguage.datastructures;
 
 public class MotherVariable extends MotherSymbol {
-
-    public static final int NUMBER = 0;
-    public static final int TEXT = 1;
-    public static final int BOOLEAN = 2;
-
-    private int type;
+    private MotherVariableTypeEnum type;
     private String value;
     private boolean init = false;
 
-    public MotherVariable(String name, int type, String value) {
+    public MotherVariable(String name, MotherVariableTypeEnum type, String value) {
         super(name);
         this.type = type;
         this.value = value;
     }
 
-    public int getType() {
+    public MotherVariableTypeEnum getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(MotherVariableTypeEnum type) {
         this.type = type;
     }
 

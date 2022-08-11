@@ -5,6 +5,7 @@ grammar MotherLang;
     import motherLanguage.datastructures.MotherVariable;
     import motherLanguage.datastructures.MotherSymbolTable;
     import motherLanguage.exception.MotherLanguageException;
+    import br.com.ufabc.motherLanguage.datastructures.MotherVariableTypeEnum;
     import motherLanguage.ast.*;
     import java.util.ArrayList;
     import java.util.Stack;
@@ -12,7 +13,7 @@ grammar MotherLang;
 
 @members{
 private String DEFAULT_VALUE = "0";
-	private int _tipo;
+	private MotherVariableTypeEnum _tipo;
 	private String _varName, _varValue;
 	private MotherSymbolTable symbolTable = new MotherSymbolTable();
 	private MotherSymbol symbol;
@@ -31,54 +32,47 @@ private String DEFAULT_VALUE = "0";
     private ArrayList<AbstractCommand> _padraoCaso;
 
 
-	public void verificaID(String id){
+	public void verificaDeclacracaoExistenteID(String id) {
 		if (!symbolTable.exists(id)){
-			throw new MotherSemanticException("Symbol "+id+" not declared");
+			throw new MotherSemanticException("SYMBOL \""+id+"\" HAS NOT BEEN DECLARED");
 		}
 	}
 
-	public int getTipoId(String id){
+	public void verificaDeclaracaoDuplaID(String id) {
+	    if (!symbolTable.exists(_varName)){
+            symbolTable.add(variable);
+        }
+        else{
+            throw new MotherSemanticException("SYMBOL \""+_varName+"\" WAS ALREADY DECLARED");
+        }
+    }
+
+	public MotherVariableTypeEnum getTipoId(String id){
 	 return symbolTable.get(id).getType();
 	}
 
-	public void verificaInicializacao(String id) {
+	public void verificaInicializacao(String id)  {
         if(!symbolTable.get(id).isInit()) {
-            throw new MotherSemanticException("Variable "+id+" not initialized");
+            throw new MotherSemanticException("VARIABLE \""+id+"\" WAS NOT INITIALIZED");
         }
 	}
 
-    public void verificaText(String id) {
-            verificaID(id);
-            MotherVariable var = symbolTable.get(id);
-            if(var.getType() != MotherVariable.TEXT){
-                throw new MotherSemanticException("Variable " + var.getName() +" not a text type - types mismatch");
-            }
-    }
-
-    public void verificaNumero(String id) {
-            verificaID(id);
-            MotherVariable var = symbolTable.get(id);
-            if(var.getType() != MotherVariable.NUMBER){
-                throw new MotherSemanticException("variable " + var.getName() +" not a number type - types mismatch");
-            }
-    }
-
-       public void verificaBooleano(String id) {
-                verificaID(id);
-                MotherVariable var = symbolTable.get(id);
-                if(var.getType() != MotherVariable.BOOLEAN){
-                    throw new MotherSemanticException("variable " + var.getName() +" not a boolean type - types mismatch");
-                }
-        }
+	   public void verificaTipo(String id,MotherVariableTypeEnum tipoRecebido) {
+	   	            MotherVariable var = symbolTable.get(id);
+	   	            if(var.getType() != tipoRecebido){
+	   				    throw new MotherSemanticException("VALUE SET TO VARIABLE \""+ var.getName() +"\" IS NOT THE SAME TYPE DECLARED.\nWanted: "+var.getType()+", got \""+tipoRecebido+"\" instead");
+	   	            }
+	   	    }
 
     public void verificaUsoVars() {
-        for(MotherSymbol symbol : symbolTable.values()) {
-                MotherVariable var = (MotherVariable) symbol;
-            if(var.getValue() == null) {
-                    System.out.println("variable " + var.getName() + " not used");
-            }
-        }
-    }
+	   	if(symbolTable.values().stream().anyMatch(variable -> variable.getValue() == null)) {
+   			for(MotherVariable variable : symbolTable.values()) {
+   				if(variable.getValue() == null) {
+   					System.out.println("WARNING: VARIABLE \"" + variable.getName() + "\" IS NEVER USED");
+   	    		}
+   		   	}
+   	   }
+   	}
 
 	public void exibeComandos(){
 		for (AbstractCommand c: program.getComandos()){
@@ -106,36 +100,25 @@ decl    :  (declaravar)*
         ;
 
 declaravar :  tipo
-              ID  {
-	                  _varName = _input.LT(-1).getText();
-	                  _varValue = null;
-	                  variable = new MotherVariable(_varName, _tipo, _varValue);
-	                  if (!symbolTable.exists(_varName)){
-	                     symbolTable.add(variable);
-	                  }
-	                  else{
-	                  	 throw new MotherSemanticException("Symbol "+_varName+" already declared");
-	                  }
-                    }
-              (  VIR
-              	 ID {
-	                  _varName = _input.LT(-1).getText();
-	                  _varValue = null;
-	                  variable = new MotherVariable(_varName, _tipo, _varValue);
-	                  if (!symbolTable.exists(_varName)){
-	                     symbolTable.add(variable);
-	                  }
-	                  else{
-	                  	 throw new MotherSemanticException("Symbol "+_varName+" already declared");
-	                  }
-                    }
-              )*
+              var
+               (
+                VIR
+              	var
+               )*
                SC
            ;
 
-tipo       : 'numero' { _tipo = MotherVariable.NUMBER;  }
-           | 'texto'  { _tipo = MotherVariable.TEXT;  }
-           | 'booleano'  { _tipo = MotherVariable.BOOLEAN;  }
+var :  ID  {
+      	      _varName = _input.LT(-1).getText();
+      	      _varValue = null;
+      	      variable = new MotherVariable(_varName, _tipo, _varValue);
+      	      verificaDeclaracaoDuplaID(_varName);
+           }
+    ;
+
+tipo       : 'numero' { _tipo =MotherVariableTypeEnum.NUMBER;  }
+           | 'texto'  { _tipo = MotherVariableTypeEnum.TEXT;  }
+           | 'booleano'  { _tipo = MotherVariableTypeEnum.BOOLEAN;  }
            ;
 
 bloco	: { curThread = new ArrayList<AbstractCommand>();
@@ -153,12 +136,12 @@ cmd		:  cmdleitura
 		;
 
 cmdleitura	: 'leia' AP
-                     ID { verificaID(_input.LT(-1).getText());
+                     ID { verificaDeclacracaoExistenteID(_input.LT(-1).getText());
                      	  _readID = _input.LT(-1).getText();
                         }
                      FP
                      SC
-              { verificaID(_readID);
+              {
               	MotherVariable var = symbolTable.get(_readID);
               	var.setInit(true);
               	CommandLeitura cmd = new CommandLeitura(_readID, var);
@@ -168,7 +151,7 @@ cmdleitura	: 'leia' AP
 
 cmdescrita	: 'escreva'
                  AP
-                 ID { verificaID(_input.LT(-1).getText());
+                 ID { verificaDeclacracaoExistenteID(_input.LT(-1).getText());
 	                  _writeID = _input.LT(-1).getText();
 	                  verificaInicializacao(_writeID);
                      }
@@ -180,17 +163,16 @@ cmdescrita	: 'escreva'
                }
 			;
 
-cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
+cmdattrib	:  ID { verificaDeclacracaoExistenteID(_input.LT(-1).getText());
                     _exprID = _input.LT(-1).getText();
                    }
                ATTR { _exprContent = ""; }
                (
-               cmdexponenciacao
-               | expr
-               | BOOL { verificaBooleano(_exprID);
+               expr
+               | BOOL { verificaTipo(_exprID,MotherVariableTypeEnum.BOOLEAN);
                         _exprContent += _input.LT(-1).getText() ;
                       }
-               | TEXT { verificaText(_exprID);
+               | TEXT { verificaTipo(_exprID,MotherVariableTypeEnum.TEXT);
                         _exprContent += _input.LT(-1).getText() ;
                       }
                )
@@ -245,7 +227,7 @@ cmdexponenciacao  : AP
                     VIR
                     'resulta'
                     ID{
-                    verificaNumero(_input.LT(-1).getText());
+                    verificaTipo(_input.LT(-1).getText(),MotherVariableTypeEnum.NUMBER);
                     _exprPowRes = _input.LT(-1).getText();
                     }
                     FP
@@ -299,29 +281,26 @@ cmdselecionacaso : 'seleciona'
                     }
                  ;
 
-expr		:  termo (
-	             OP  { _exprContent += _input.LT(-1).getText();}
-	            termo )*
+expr		:  termo
+                (
+	            OP  { _exprContent += _input.LT(-1).getText();}
+	            termo
+	            )*
 			;
 
-termo		: ID { verificaID(_input.LT(-1).getText());
-                    verificaInicializacao(_input.LT(-1).getText());
+termo		: ID { verificaTipo(_exprID,MotherVariableTypeEnum.NUMBER);
+                    verificaInicializacao(_exprID);
 	               _exprContent += _input.LT(-1).getText();
                  }
             |
               NUMBER
-              {
+              {  verificaTipo(_exprID,MotherVariableTypeEnum.NUMBER);
               	_exprContent += _input.LT(-1).getText();
-              }
-            |
-              TEXT
-              {
-                _exprContent += _input.LT(-1).getText();
               }
 			;
 
 termocaso : ID {
-             verificaID(_input.LT(-1).getText());
+             verificaDeclacracaoExistenteID(_input.LT(-1).getText());
              verificaInicializacao(_input.LT(-1).getText());
              _listaExpCaso.add(_input.LT(-1).getText());
             }

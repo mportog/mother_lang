@@ -1,22 +1,25 @@
-// Generated from /Users/matheusporto/Documents/mother_lang/motherLang/MotherLang.g4 by ANTLR 4.7.1
+// Generated from C:\Users\welle\OneDrive\Documentos\GitHub\mother_lang\motherLang\MotherLang.g4 by ANTLR 4.7.1
 package br.com.ufabc.motherLanguage.parser;
 
-
-import br.com.ufabc.motherLanguage.ast.AbstractCommand;
-import br.com.ufabc.motherLanguage.ast.MotherProgram;
+import br.com.ufabc.motherLanguage.datastructures.MotherVariableTypeEnum;
+import br.com.ufabc.motherLanguage.ast.*;
 import br.com.ufabc.motherLanguage.datastructures.MotherSymbol;
 import br.com.ufabc.motherLanguage.datastructures.MotherSymbolTable;
 import br.com.ufabc.motherLanguage.datastructures.MotherVariable;
 import br.com.ufabc.motherLanguage.exception.MotherSemanticException;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.LexerATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
-import org.antlr.v4.runtime.dfa.DFA;
+    import br.com.ufabc.motherLanguage.datastructures.MotherVariableTypeEnum;
+    import java.util.ArrayList;
+    import java.util.Stack;
 
-import java.util.ArrayList;
-import java.util.Stack;
+
+import org.antlr.v4.runtime.Lexer;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.atn.*;
+import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MotherLangLexer extends Lexer {
@@ -91,7 +94,7 @@ public class MotherLangLexer extends Lexer {
 
 
 	private String DEFAULT_VALUE = "0";
-		private int _tipo;
+		private MotherVariableTypeEnum _tipo;
 		private String _varName, _varValue;
 		private MotherSymbolTable symbolTable = new MotherSymbolTable();
 		private MotherSymbol symbol;
@@ -110,54 +113,47 @@ public class MotherLangLexer extends Lexer {
 	    private ArrayList<AbstractCommand> _padraoCaso;
 
 
-		public void verificaID(String id){
+		public void verificaDeclacracaoExistenteID(String id) {
 			if (!symbolTable.exists(id)){
-				throw new MotherSemanticException("Symbol "+id+" not declared");
+				throw new MotherSemanticException("SYMBOL \""+id+"\" HAS NOT BEEN DECLARED");
 			}
 		}
 
-		public int getTipoId(String id){
+		public void verificaDeclaracaoDuplaID(String id) {
+		    if (!symbolTable.exists(_varName)){
+	            symbolTable.add(variable);
+	        }
+	        else{
+	            throw new MotherSemanticException("SYMBOL \""+_varName+"\" WAS ALREADY DECLARED");
+	        }
+	    }
+
+		public MotherVariableTypeEnum getTipoId(String id){
 		 return symbolTable.get(id).getType();
 		}
 
-		public void verificaInicializacao(String id) {
+		public void verificaInicializacao(String id)  {
 	        if(!symbolTable.get(id).isInit()) {
-	            throw new MotherSemanticException("Variable "+id+" not initialized");
+	            throw new MotherSemanticException("VARIABLE \""+id+"\" WAS NOT INITIALIZED");
 	        }
 		}
 
-	    public void verificaText(String id) {
-	            verificaID(id);
-	            MotherVariable var = symbolTable.get(id);
-	            if(var.getType() != MotherVariable.TEXT){
-	                throw new MotherSemanticException("Variable " + var.getName() +" not a text type - types mismatch");
-	            }
-	    }
-
-	    public void verificaNumero(String id) {
-	            verificaID(id);
-	            MotherVariable var = symbolTable.get(id);
-	            if(var.getType() != MotherVariable.NUMBER){
-	                throw new MotherSemanticException("variable " + var.getName() +" not a number type - types mismatch");
-	            }
-	    }
-
-	       public void verificaBooleano(String id) {
-	                verificaID(id);
-	                MotherVariable var = symbolTable.get(id);
-	                if(var.getType() != MotherVariable.BOOLEAN){
-	                    throw new MotherSemanticException("variable " + var.getName() +" not a boolean type - types mismatch");
-	                }
-	        }
+		   public void verificaTipo(String id,MotherVariableTypeEnum tipoRecebido) {
+		   	            MotherVariable var = symbolTable.get(id);
+		   	            if(var.getType() != tipoRecebido){
+		   				    throw new MotherSemanticException("VALUE SET TO VARIABLE \""+ var.getName() +"\" IS NOT THE SAME TYPE DECLARED.\nWanted: "+var.getType()+", got \""+tipoRecebido+"\" instead");
+		   	            }
+		   	    }
 
 	    public void verificaUsoVars() {
-	        for(MotherSymbol symbol : symbolTable.values()) {
-	                MotherVariable var = (MotherVariable) symbol;
-	            if(var.getValue() == null) {
-	                    System.out.println("variable " + var.getName() + " not used");
-	            }
-	        }
-	    }
+		   	if(symbolTable.values().stream().anyMatch(variable -> variable.getValue() == null)) {
+	   			for(MotherVariable variable : symbolTable.values()) {
+	   				if(variable.getValue() == null) {
+	   					System.out.println("WARNING: VARIABLE \"" + variable.getName() + "\" IS NEVER USED");
+	   	    		}
+	   		   	}
+	   	   }
+	   	}
 
 		public void exibeComandos(){
 			for (AbstractCommand c: program.getComandos()){
