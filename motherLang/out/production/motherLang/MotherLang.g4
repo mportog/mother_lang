@@ -29,7 +29,7 @@ private String DEFAULT_VALUE = "0";
     private ArrayList<String> _listaExpCaso;
     private ArrayList<ArrayList<AbstractCommand>> _listaCaso;
     private ArrayList<AbstractCommand> _padraoCaso;
-
+    private ArrayList<AbstractCommand> _listaEnquanto;
 
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
@@ -150,6 +150,7 @@ cmd		:  cmdleitura
  		|  cmdselecao
  		|  cmdexponenciacao
  		|  cmdselecionacaso
+ 		|  cmdenquanto
 		;
 
 cmdleitura	: 'leia' AP
@@ -232,10 +233,11 @@ cmdselecao  :  'se' AP
                    	FCH
                    	{
                    		listaFalse = stack.pop();
-                   		CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
+                   		}
+                   )?
+                   		{CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
                    		stack.peek().add(cmd);
                    	}
-                   )?
             ;
 
 cmdexponenciacao  : AP
@@ -299,9 +301,25 @@ cmdselecionacaso : 'seleciona'
                     }
                  ;
 
+cmdenquanto    : 'enquanto'
+                 AP
+                 ID {  _exprContent = _input.LT(-1).getText(); }
+                 FP
+                 ACH
+                 {  curThread = new ArrayList<AbstractCommand>();
+                    stack.push(curThread);
+                 }
+                 (cmd)+
+                 FCH
+                 {  _listaEnquanto = stack.pop();
+                    CommandEnquanto cmd = new CommandEnquanto(_exprContent, _listaEnquanto);
+                    stack.peek().add(cmd);
+                 }
+               ;
+
 expr		:  termo (
 	             OP  { _exprContent += _input.LT(-1).getText();}
-	            termo )*
+	           termo )*
 			;
 
 termo		: ID { verificaID(_input.LT(-1).getText());

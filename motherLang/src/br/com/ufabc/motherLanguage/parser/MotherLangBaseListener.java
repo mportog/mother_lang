@@ -160,6 +160,18 @@ public class MotherLangBaseListener implements MotherLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCmdenquanto(MotherLangParser.CmdenquantoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdenquanto(MotherLangParser.CmdenquantoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExpr(MotherLangParser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
