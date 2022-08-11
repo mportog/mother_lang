@@ -6,6 +6,7 @@
 |-------|----|
 | Matheus Porto Garcia   | 11051116|
 | Samuel Esdras Navarro da Silva   | 11093914|
+| Wellington Araujo da Silva   | 11201722653|
 
 ## Video-Aulas utilizadas como base: **[Compiladores - Curso Completo](https://youtube.com/playlist?list=PLjcmNukBom6--0we1zrpoUE2GuRD-Me6W)**.
 
