@@ -6,6 +6,9 @@
 *.classpath
 *.project
 
+*.idea
+*.idea/
+
 # Log file
 *.log
 
