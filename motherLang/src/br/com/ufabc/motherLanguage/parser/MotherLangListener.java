@@ -1,7 +1,14 @@
-// Generated from C:\Users\welle\OneDrive\Documentos\GitHub\mother_lang\motherLang\MotherLang.g4 by ANTLR 4.7.1
+// Generated from /Users/matheusporto/Documents/mother_lang/motherLang/MotherLang.g4 by ANTLR 4.7.1
 package br.com.ufabc.motherLanguage.parser;
 
-
+    import br.com.ufabc.motherLanguage.datastructures.MotherSymbol;
+    import br.com.ufabc.motherLanguage.datastructures.MotherVariable;
+    import br.com.ufabc.motherLanguage.datastructures.MotherSymbolTable;
+    import br.com.ufabc.motherLanguage.exception.MotherSemanticException;
+    import br.com.ufabc.motherLanguage.datastructures.MotherVariableTypeEnum;
+    import br.com.ufabc.motherLanguage.ast.*;
+    import java.util.ArrayList;
+    import java.util.Stack;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -140,6 +147,16 @@ public interface MotherLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCmdselecionacaso(MotherLangParser.CmdselecionacasoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MotherLangParser#cmdenquanto}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdenquanto(MotherLangParser.CmdenquantoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MotherLangParser#cmdenquanto}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdenquanto(MotherLangParser.CmdenquantoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MotherLangParser#expr}.
 	 * @param ctx the parse tree

@@ -1,5 +1,14 @@
-// Generated from C:\Users\welle\OneDrive\Documentos\GitHub\mother_lang\motherLang\MotherLang.g4 by ANTLR 4.7.1
+// Generated from /Users/matheusporto/Documents/mother_lang/motherLang/MotherLang.g4 by ANTLR 4.7.1
 package br.com.ufabc.motherLanguage.parser;
+
+    import br.com.ufabc.motherLanguage.datastructures.MotherSymbol;
+    import br.com.ufabc.motherLanguage.datastructures.MotherVariable;
+    import br.com.ufabc.motherLanguage.datastructures.MotherSymbolTable;
+    import br.com.ufabc.motherLanguage.exception.MotherSemanticException;
+    import br.com.ufabc.motherLanguage.datastructures.MotherVariableTypeEnum;
+    import br.com.ufabc.motherLanguage.ast.*;
+    import java.util.ArrayList;
+    import java.util.Stack;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -168,6 +177,18 @@ public class MotherLangBaseListener implements MotherLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmdselecionacaso(MotherLangParser.CmdselecionacasoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdenquanto(MotherLangParser.CmdenquantoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdenquanto(MotherLangParser.CmdenquantoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

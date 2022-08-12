@@ -1,0 +1,20 @@
+programa
+
+numero n1;
+booleano b;
+
+b = vdd;
+n1=0;
+
+enquanto(b){
+   se(n1 == 5)
+   {
+       b=falso;
+   }
+   senao
+   {
+   n1=n1+1;
+   }
+}
+
+fimprog;
