@@ -17,7 +17,7 @@ public class CommandExponenciacao extends AbstractCommand {
     }
     @Override
     public String generatePythonCode(){
-        return "exponenciacao phyton";
+        return out+"=pow("+base+","+exp+")\n";
     }
     @Override
     public String toString() {

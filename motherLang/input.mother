@@ -1,13 +1,16 @@
 programa
 
-numero a, zero0, x, r;
+numero a, zero0, x, r, n1;
 texto c, condicaoT, casoT1, casoT2 , resultado;
 booleano t;
+booleano b;
 
 condicaoT = "0";
 casoT1 = "1";
 casoT2 = "2";
 
+b = falso;
+n1=0;
 t = vdd;
 a = -1 ;
 zero0 = 0;
@@ -49,5 +52,17 @@ seleciona( condicaoT ) {
 }
 
 escreva(resultado);
+
+
+enquanto(b){
+   se(n1 == 5)
+   {
+       b=falso;
+   }
+   senao
+   {
+   n1=n1+1;
+   }
+}
 
 fimprog;

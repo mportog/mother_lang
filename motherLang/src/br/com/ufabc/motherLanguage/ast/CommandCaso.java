@@ -42,7 +42,24 @@ public class CommandCaso extends AbstractCommand {
     }
     @Override
     public String generatePythonCode(){
-        return "switch case em phyton";
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < listaExpCaso.size(); i++) {
+            if(i==0) {
+                str.append("if ").append(condition).append(" == ").append(listaExpCaso.get(i)).append(":\n");
+            }
+            else {
+                str.append("elif ").append(condition).append(" == ").append(listaExpCaso.get(i)).append(":\n");
+            }for (AbstractCommand cmd : listaCaso.get(i)) {
+                str.append("    ").append(cmd.generatePythonCode()).append("\n");
+            }
+        }
+        if (padraoCaso.size() > 0) {
+            str.append("else:\n");
+            for (AbstractCommand cmd : padraoCaso) {
+                str.append("    ").append(cmd.generatePythonCode());
+            }
+        }
+        return str.toString();
     }
     @Override
     public String toString() {

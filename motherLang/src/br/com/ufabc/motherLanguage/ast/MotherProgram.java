@@ -40,14 +40,12 @@ public class MotherProgram {
 
     public void generatePhytonTarget() {
         StringBuilder str = new StringBuilder();
-        str.append("add math.lib de phyton\n\n");
         for (MotherSymbol symbol : varTable.getAll()) {
-            str.append("        " + symbol.generatePhytonCode() + "\n");
+            str.append(symbol.generatePhytonCode());
         }
         for (AbstractCommand command : comandos) {
-            str.append("        " + command.generatePythonCode()).append("\n");
+            str.append(command.generatePythonCode()).append("\n");
         }
-        str.append("    }\n");
 
         try {
             FileWriter fr = new FileWriter("src/MainClass.py");
