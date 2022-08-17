@@ -23,7 +23,7 @@ public class MainClass {
 
     public static void main(String[] args) {
         try {
-            MotherLangLexer lexer = new MotherLangLexer(CharStreams.fromFileName("input.mother"));
+            MotherLangLexer lexer = new MotherLangLexer(CharStreams.fromFileName(MotherLangInputSource.INPUT_ENTREGA.ambiente));
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);
             MotherLangParser parser = new MotherLangParser(tokenStream);
 
