@@ -35,8 +35,22 @@ public class CommandLeitura extends AbstractCommand {
     }
     @Override
     public String generatePythonCode(){
-        return id + " = _key.nextLine()";
+        return id + " = (" + parsePythonType() + "(input())";
     }
+    private String parsePythonType() {
+        String str = "";
+        switch (var.getType()) {
+            case NUMBER:
+                str = "float;";
+                break;
+            case BOOLEAN:
+                str = "bool;";
+                break;
+        }
+        return str;
+
+    }
+
     @Override
     public String toString() {
         return "CommandLeitura [id=" + id + "]";

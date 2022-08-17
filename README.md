@@ -25,14 +25,14 @@
 - [x] Linguagem Destino (Java)
 - [x] Verificar se a variável foi ou não inicializada, atribuído um valor a ela
 - [x] Verificar atribuição de variáveis (Erro semântico) - compatibilidade de tipos
-- [ ] Pelo menos 1 estrutura de repetição
+- [x] Pelo menos 1 estrutura de repetição
 
 
 ### Elementos adicionais (pelo menos 2 dos itens abaixo):
 - [x]  Mais tipos de dados (Boolean)
 - [x]  Inclusão de novos operadores (exponenciação)
 - [x]  Nova instrução para Switch/Case (escolha/caso)
-- [ ]  Geração de código para mais de uma linguagem diferente 
+- [x]  Geração de código para mais de uma linguagem diferente 
 
 
 ### Elementos Extraordinarios (pelo menos 2 itens abaixo):

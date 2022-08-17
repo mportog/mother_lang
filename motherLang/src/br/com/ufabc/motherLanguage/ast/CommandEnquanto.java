@@ -23,7 +23,12 @@ public class CommandEnquanto extends AbstractCommand {
     }
     @Override
     public String generatePythonCode(){
-        return "while phyton";
+        StringBuilder str = new StringBuilder();
+        str.append("while ").append(condition).append(":\n");
+        for (AbstractCommand cmd: listaEnquanto) {
+            str.append("    ").append(cmd.generatePythonCode());
+        }
+        return str.toString();
     }
     @Override
     public String toString() {
