@@ -1,6 +1,6 @@
 programa
 
-para(i=0 conteate i < 4 operacao i++) {
+para(i=0 conteate i < 10 operacao i++) {
 		escreva("teste");
 	}
 
