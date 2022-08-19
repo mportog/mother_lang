@@ -7,6 +7,7 @@ t = True
 b = False
 a = -1
 zero0 = 0
+nomes = ['Matheus', 'Samuel','Wellington','Gabriel','Karolyne']
 x = 3+2*20/4
 print(x)
 if t:
@@ -34,3 +35,6 @@ while b:
         b = False
 else:
     n1 = n1+1
+
+for i in nomes:
+    print(i)
