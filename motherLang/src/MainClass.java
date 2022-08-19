@@ -27,7 +27,8 @@ public class MainClass {
         zero0 = 0;
         x = 3+2*20/4;
         System.out.println(x);
-        if (t) {
+        if (t) 
+        {
             c = "deu bom";            
 } else {
             c = "deu ruim";            
