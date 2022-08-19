@@ -28,17 +28,6 @@ public class CommandPara extends AbstractCommand{
         return string.toString();
     }
 
-    @Override
-    public String generatePythonCode() {
-        // TODO Auto-generated method stub
-        StringBuilder string = new StringBuilder();
-        string.append("for " + valor + "in" + "(" + condicao + ")" + ":" + incremento + "\n");
-        for (AbstractCommand cmd: listaComando) {
-            string.append(cmd.generatePythonCode()+"\n");
-        }
-        string.append("}");
-        return string.toString();
-    }
 
     @Override
     public String toString() {

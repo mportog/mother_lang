@@ -5,14 +5,14 @@ import br.com.ufabc.motherLanguage.parser.MotherLangLexer;
 import br.com.ufabc.motherLanguage.parser.MotherLangParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import static br.com.ufabc.motherLanguage.main.MainClass.MotherLangInputSource.*;
 
 public class MainClass {
     enum MotherLangInputSource {
         INPUT_ENTREGA("input.mother"),
         INPUT_TESTANDO_ERROS("input_teste_erros.mother"),
         INPUT_SELECIONA_CASO("input_seleciona_caso.mother"),
-        INPUT_ENQAUNTO("input_enquanto.mother");
+        INPUT_ENQUANTO("input_enquanto.mother"),
+        INPUT_PARA("input_teste_para.mother");
 
         public final String ambiente;
 
