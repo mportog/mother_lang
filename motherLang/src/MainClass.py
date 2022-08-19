@@ -35,6 +35,3 @@ while b:
         b = False
 else:
     n1 = n1+1
-
-for i in nomes:
-    print(i)
