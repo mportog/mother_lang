@@ -1,0 +1,7 @@
+programa
+
+para(i=0 conteate i < 4 operacao i++) {
+		escreva(i);
+	}
+
+fimprog;
