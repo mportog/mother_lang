@@ -331,7 +331,7 @@ cmdpara : 'para'
 		  {
 			 		_expressInit += _input.LT(-1).getText();
 		  }
-		  (ID | NUMBER)
+		  (ID|NUMBER)
 		  {
                    	_expressInit += _input.LT(-1).getText();
 		  }
