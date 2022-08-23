@@ -307,57 +307,57 @@ cmdenquanto    : 'enquanto'
                  }
                ;
 
-cmdpara : 'para'
-		  AP
-		  ID
-		  {
-					_expressInit = _input.LT(-1).getText();
-					symbolTable.get(_expressInit).setUsed();
-		  }
-		  ATTR
-		  {
-			 		_expressInit += "=";
-		  }
-		  (ID | NUMBER)
-		  {
-                   	_expressInit += _input.LT(-1).getText();
-		  }
-		  'conteate'
-		  ID
-		  {
-					_expressDec = _input.LT(-1).getText();
-		  }
-		  OPREL
-		  {
-			 		_expressDec += _input.LT(-1).getText();
-		  }
-		  (ID | NUMBER)
-		  {
-                   	_expressDec += _input.LT(-1).getText();
-		  }
-		  'operacao'
-		  ID
-		  {
-					_expressInc = _input.LT(-1).getText();
-		  }
- 		  INC
- 		  {
- 		  			_expressInc += "++";
- 		  }
-		  FP
-		  ACH
-		  {
-					curThread; = new ArrayList<AbstractCommand>();
-		            stack.push(currentThread);
-		  }
-		  (cmd)+
-		  FCH
-		  {
-					listarComando = stack.pop();
-					CommandPara cmd = new CommandPara(_expressInit, _expressDec, _expressInc,  listarComando);
-					stack.peek().add(cmd);
-		  }
-		;
+//cmdpara : 'para'
+//		  AP
+//		  ID
+//		  {
+//					_expressInit = _input.LT(-1).getText();
+//					symbolTable.get(_expressInit).setUsed();
+//		  }
+//		  ATTR
+//		  {
+//			 		_expressInit += "=";
+//		  }
+//		  (ID | NUMBER)
+//		  {
+//                   	_expressInit += _input.LT(-1).getText();
+//		  }
+//		  'conteate'
+//		  ID
+//		  {
+//					_expressDec = _input.LT(-1).getText();
+//		  }
+//		  OPREL
+//		  {
+//			 		_expressDec += _input.LT(-1).getText();
+//		  }
+//		  (ID | NUMBER)
+//		  {
+//                   	_expressDec += _input.LT(-1).getText();
+//		  }
+//		  'operacao'
+//		  ID
+//		  {
+//					_expressInc = _input.LT(-1).getText();
+//		  }
+// 		  INC
+// 		  {
+// 		  			_expressInc += "++";
+// 		  }
+//		  FP
+//		  ACH
+//		  {
+//					curThread; = new ArrayList<AbstractCommand>();
+//		            stack.push(currentThread);
+//		  }
+//		  (cmd)+
+//		  FCH
+//		  {
+//					listarComando = stack.pop();
+//					CommandPara cmd = new CommandPara(_expressInit, _expressDec, _expressInc,  listarComando);
+//					stack.peek().add(cmd);
+//		  }
+//		;
 
 expr		:  termo (
 	             OP  { _exprContent += _input.LT(-1).getText();}
