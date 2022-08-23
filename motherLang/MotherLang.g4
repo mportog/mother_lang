@@ -325,15 +325,15 @@ cmdpara : 'para'
 		  'conteate'
 		  ID
 		  {
-					_expressInit = _input.LT(-1).getText();
+					_expressDec = _input.LT(-1).getText();
 		  }
 		  OPREL
 		  {
-			 		_expressInit += _input.LT(-1).getText();
+			 		_expressDec += _input.LT(-1).getText();
 		  }
 		  (ID|NUMBER)
 		  {
-                   	_expressInit += _input.LT(-1).getText();
+                   	_expressDec += _input.LT(-1).getText();
 		  }
 		  'operacao'
 		  ID
@@ -354,7 +354,7 @@ cmdpara : 'para'
 		  FCH
 		  {
 					listarComando = stack.pop();
-					CommandPara cmd = new CommandPara(_exprForStart, _exprForDecision, _exprForIncrement,  listaComando);
+					CommandPara cmd = new CommandPara(_expressInit, _expressDec, _expressInc,  listarComando);
 					stack.peek().add(cmd);
 		  }
 		;

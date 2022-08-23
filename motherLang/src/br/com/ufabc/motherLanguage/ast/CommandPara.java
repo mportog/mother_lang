@@ -29,6 +29,8 @@ public class CommandPara extends AbstractCommand{
     }
 
 
+
+
     @Override
     public String toString() {
         return "CommandPara [valor=[" + valor + "],condicao=[" + condicao + "], incremento=[" + incremento + "], listarComando=" + listaComando + "]";
