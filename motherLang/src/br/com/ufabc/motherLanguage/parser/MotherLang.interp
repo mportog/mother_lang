@@ -83,6 +83,7 @@ cmdselecao
 cmdexponenciacao
 cmdselecionacaso
 cmdenquanto
+cmdpara
 expr
 termo
 termocaso
