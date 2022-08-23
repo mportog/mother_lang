@@ -19,16 +19,14 @@ public class MainClass {
         condicaoT = "0";
         casoT1 = "1";
         casoT2 = "2";
-        b = true;
+        b = false;
         n1 = 0;
         t = true;
-        b = false;
         a = -1;
         zero0 = 0;
         x = 3+2*20/4;
         System.out.println(x);
-        if (t) 
-        {
+        if (t) {
             c = "deu bom";            
 } else {
             c = "deu ruim";            

@@ -1,13 +1,11 @@
 condicaoT = "0"
 casoT1 = "1"
 casoT2 = "2"
-b = True
+b = False
 n1 = 0
 t = True
-b = False
 a = -1
 zero0 = 0
-nomes = ['Matheus', 'Samuel','Wellington','Gabriel','Karolyne']
 x = 3+2*20/4
 print(x)
 if t:
@@ -32,6 +30,6 @@ else:
 print(resultado)
 while b:
     if n1==5:
-        b = False
+    b = False
 else:
     n1 = n1+1

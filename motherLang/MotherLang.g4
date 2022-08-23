@@ -32,10 +32,10 @@ private String DEFAULT_VALUE = "0";
     private ArrayList<ArrayList<AbstractCommand>> _listaCaso;
     private ArrayList<AbstractCommand> _padraoCaso;
     private ArrayList<AbstractCommand> _listaEnquanto;
-    private String _expressInit;
-    private String _expressInc;
-    private String _expressDecid;
-    private ArrayList<AbstractCommand> listarComando;
+//    private String _expressInit;
+//    private String _expressInc;
+//    private String _expressDecid;
+//    private ArrayList<AbstractCommand> listarComando;
 
 	public void verificaDeclacracaoExistenteID(String id) {
 		if (!symbolTable.exists(id)){
@@ -307,57 +307,57 @@ cmdenquanto    : 'enquanto'
                  }
                ;
 
-cmdpara : 'para'
-		  AP
-		  ID
-		  {
-					_expressInit = _input.LT(-1).getText();
-					symbolTable.get(_expressInit).setUsed();
-		  }
-		  ATTR
-		  {
-			 		_expressInit += "=";
-		  }
-		  (ID | NUMBER)
-		  {
-                   	_expressInit += _input.LT(-1).getText();
-		  }
-		  'conteate'
-		  ID
-		  {
-					_expressDec = _input.LT(-1).getText();
-		  }
-		  OPREL
-		  {
-			 		_expressDec += _input.LT(-1).getText();
-		  }
-		  (ID | NUMBER)
-		  {
-                   	_expressDec += _input.LT(-1).getText();
-		  }
-		  'operacao'
-		  ID
-		  {
-					_expressInc = _input.LT(-1).getText();
-		  }
- 		  IC
- 		  {
- 		  			_expressInc += "++";
- 		  }
-		  FP
-		  ACH
-		  {
-					curThread; = new ArrayList<AbstractCommand>();
-		            stack.push(currentThread);
-		  }
-		  (cmd)+
-		  FCH
-		  {
-					listarComando = stack.pop();
-					CommandPara cmd = new CommandPara(_expressInit, _expressDec, _expressInc,  listarComando);
-					stack.peek().add(cmd);
-		  }
-		;
+//cmdpara : 'para'
+//		  AP
+//		  ID
+//		  {
+//					_expressInit = _input.LT(-1).getText();
+//					symbolTable.get(_expressInit).setUsed();
+//		  }
+//		  ATTR
+//		  {
+//			 		_expressInit += "=";
+//		  }
+//		  (ID | NUMBER)
+//		  {
+//                   	_expressInit += _input.LT(-1).getText();
+//		  }
+//		  'conteate'
+//		  ID
+//		  {
+//					_expressDec = _input.LT(-1).getText();
+//		  }
+//		  OPREL
+//		  {
+//			 		_expressDec += _input.LT(-1).getText();
+//		  }
+//		  (ID | NUMBER)
+//		  {
+//                   	_expressDec += _input.LT(-1).getText();
+//		  }
+//		  'operacao'
+//		  ID
+//		  {
+//					_expressInc = _input.LT(-1).getText();
+//		  }
+// 		  INC
+// 		  {
+// 		  			_expressInc += "++";
+// 		  }
+//		  FP
+//		  ACH
+//		  {
+//					curThread = new ArrayList<AbstractCommand>();
+//		            stack.push(currentThread);
+//		  }
+//		  (cmd)+
+//		  FCH
+//		  {
+//					listarComando = stack.pop();
+//					CommandPara cmd = new CommandPara(_expressInit, _expressDec, _expressInc,  listarComando);
+//					stack.peek().add(cmd);
+//		  }
+//		;
 
 expr		:  termo (
 	             OP  { _exprContent += _input.LT(-1).getText();}
@@ -439,3 +439,6 @@ NUMBER	: '-'? [0-9]+ ('.' [0-9]+)?
 		;
 
 WS	: (' ' | '\t' | '\n' | '\r') -> skip;
+
+INC : '++'
+   ;
