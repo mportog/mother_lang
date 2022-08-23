@@ -36,7 +36,7 @@ public class MotherLangParser extends Parser {
 		RULE_bloco = 5, RULE_cmd = 6, RULE_cmdleitura = 7, RULE_cmdescrita = 8, 
 		RULE_cmdattrib = 9, RULE_cmdselecao = 10, RULE_cmdexponenciacao = 11, 
 		RULE_cmdselecionacaso = 12, RULE_cmdenquanto = 13, RULE_expr = 14, RULE_termo = 15, 
-		RULE_termocaso = 16;
+		RULE_termocaso = 16, RULE_cmdpara = 17;
 	public static final String[] ruleNames = {
 		"prog", "decl", "declaravar", "var", "tipo", "bloco", "cmd", "cmdleitura", 
 		"cmdescrita", "cmdattrib", "cmdselecao", "cmdexponenciacao", "cmdselecionacaso", 

@@ -340,7 +340,7 @@ cmdpara : 'para'
 		  {
 					_expressInc = _input.LT(-1).getText();
 		  }
- 		  IC
+ 		  INC
  		  {
  		  			_expressInc += "++";
  		  }
@@ -439,3 +439,6 @@ NUMBER	: '-'? [0-9]+ ('.' [0-9]+)?
 		;
 
 WS	: (' ' | '\t' | '\n' | '\r') -> skip;
+
+INC : '++'
+   ;
