@@ -331,7 +331,7 @@ cmdpara : 'para'
 		  {
 			 		_expressDec += _input.LT(-1).getText();
 		  }
-		  (ID|NUMBER)
+		  (ID | NUMBER)
 		  {
                    	_expressDec += _input.LT(-1).getText();
 		  }
