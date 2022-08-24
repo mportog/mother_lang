@@ -11,7 +11,7 @@
 
 ## Video-Aulas utilizadas como base: **[Compiladores - Curso Completo](https://youtube.com/playlist?list=PLjcmNukBom6--0we1zrpoUE2GuRD-Me6W)**.
 
-## **[Vídeo explicativo com os participantes]()** sobre o projeto.
+## **[Vídeo explicativo com os participantes](https://youtu.be/rRV1IbNuwrs)** sobre o projeto.
 
 ## Itens checklist do Projeto
 
