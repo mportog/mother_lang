@@ -13,6 +13,8 @@
 
 ## **[Vídeo explicativo com os participantes](https://youtu.be/rRV1IbNuwrs)** sobre o projeto.
 
+## Importante! A versão do JDK utilizado no projeto: 18
+
 ## Itens checklist do Projeto
 
 ### Itens Obrigatórios:
